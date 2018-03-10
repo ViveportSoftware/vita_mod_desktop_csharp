@@ -57,7 +57,7 @@ namespace Htc.Vita.Mod.Desktop.Log4Net
 
         protected override void OnShutdown()
         {
-            Console.WriteLine("Shutting down the log4net ...");
+            Console.Error.WriteLine("Shutting down the log4net ...");
             LogManager.Shutdown();
         }
 
