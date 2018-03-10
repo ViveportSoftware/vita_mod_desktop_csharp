@@ -9,7 +9,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
     public class Sha1Impl : Sha1
     {
-        private static bool _usingBouncyCastleFirst;
+        private static bool UsingBouncyCastleFirst { get; set; } = true;
 
         private readonly Logger _logger;
 
@@ -20,7 +20,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
         protected override string OnGenerateInBase64(FileInfo file)
         {
-            if (_usingBouncyCastleFirst)
+            if (UsingBouncyCastleFirst)
             {
                 return DoGenerateInBase64(file);
             }
@@ -32,14 +32,14 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             catch (Exception e)
             {
                 _logger.Fatal("Generating checksum by system error: " + e);
-                _usingBouncyCastleFirst = true;
+                UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(file);
         }
 
         protected override string OnGenerateInBase64(string content)
         {
-            if (_usingBouncyCastleFirst)
+            if (UsingBouncyCastleFirst)
             {
                 return DoGenerateInBase64(content);
             }
@@ -51,14 +51,14 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             catch (Exception e)
             {
                 _logger.Fatal("Generating checksum by system error: " + e);
-                _usingBouncyCastleFirst = true;
+                UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(content);
         }
 
         protected override string OnGenerateInHex(FileInfo file)
         {
-            if (_usingBouncyCastleFirst)
+            if (UsingBouncyCastleFirst)
             {
                 return DoGenerateInHex(file);
             }
@@ -70,14 +70,14 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             catch (Exception e)
             {
                 _logger.Fatal("Generating checksum by system error: " + e);
-                _usingBouncyCastleFirst = true;
+                UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(file);
         }
 
         protected override string OnGenerateInHex(string content)
         {
-            if (_usingBouncyCastleFirst)
+            if (UsingBouncyCastleFirst)
             {
                 return DoGenerateInHex(content);
             }
@@ -89,7 +89,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             catch (Exception e)
             {
                 _logger.Fatal("Generating checksum by system error: " + e);
-                _usingBouncyCastleFirst = true;
+                UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(content);
         }
