@@ -59,8 +59,8 @@
     <Compile Include="..\generated\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="HeijdenDns.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestCase.HeijdenDns.cs" />
     <Compile Include="TestCase.JsonNet.cs" />
     <Compile Include="TestCase.Log4Net.cs" />
     <Compile Include="TestCase.Md5.cs" />

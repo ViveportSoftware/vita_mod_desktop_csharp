@@ -5,10 +5,10 @@ using Xunit;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public partial class TestCase
+    public static class HeijdenDns
     {
         [Fact]
-        public void DnsImpl_0_GetInstance()
+        public static void Default_0_GetInstance()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
@@ -16,7 +16,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void DnsImpl_1_GetHostAddresses()
+        public static void Default_1_GetHostAddresses()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
@@ -46,7 +46,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void DnsImpl_2_GetHostEntry()
+        public static void Default_2_GetHostEntry()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
@@ -62,7 +62,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void DnsImpl_2_GetHostEntry_WithIPAddress()
+        public static void Default_2_GetHostEntry_WithIPAddress()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
