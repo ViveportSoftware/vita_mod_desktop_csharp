@@ -5,10 +5,10 @@ using Xunit;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public partial class TestCase
+    public static class Log4Net
     {
         [Fact]
-        public void LoggerImpl_0_GetInstance()
+        public static void Default_0_GetInstance()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -16,7 +16,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_0_GetInstance_WithName()
+        public static void Default_0_GetInstance_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -27,7 +27,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_0_GetInstance_WithType()
+        public static void Default_0_GetInstance_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -38,7 +38,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_1_Debug()
+        public static void Default_1_Debug()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -48,7 +48,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_1_Debug_WithName()
+        public static void Default_1_Debug_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -63,7 +63,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_1_Debug_WithType()
+        public static void Default_1_Debug_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -78,7 +78,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_2_Error()
+        public static void Default_2_Error()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -88,7 +88,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_2_Error_WithName()
+        public static void Default_2_Error_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -103,7 +103,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_2_Error_WithType()
+        public static void Default_2_Error_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -118,7 +118,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_3_Fatal()
+        public static void Default_3_Fatal()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -128,7 +128,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_3_Fatal_WithName()
+        public static void Default_3_Fatal_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -143,7 +143,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_3_Fatal_WithType()
+        public static void Default_3_Fatal_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -158,7 +158,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_4_Info()
+        public static void Default_4_Info()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -168,7 +168,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_4_Info_WithName()
+        public static void Default_4_Info_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -183,7 +183,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_4_Info_WithType()
+        public static void Default_4_Info_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -198,7 +198,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_5_Trace()
+        public static void Default_5_Trace()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -208,7 +208,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_5_Trace_WithName()
+        public static void Default_5_Trace_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -223,7 +223,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_5_Trace_WithType()
+        public static void Default_5_Trace_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -238,7 +238,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_6_Warn()
+        public static void Default_6_Warn()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -248,7 +248,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_6_Warn_WithName()
+        public static void Default_6_Warn_WithName()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -263,7 +263,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_6_Warn_WithType()
+        public static void Default_6_Warn_WithType()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
@@ -278,7 +278,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void LoggerImpl_7_Shutdown()
+        public static void Default_7_Shutdown()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
