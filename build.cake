@@ -163,8 +163,22 @@ Task("Build-Assemblies")
     }
 });
 
-Task("Run-Unit-Tests-Under-AnyCPU")
+Task("Prepare-Unit-Test-Data")
     .IsDependentOn("Build-Assemblies")
+    .Does(() =>
+{
+    if (!FileExists(homeDir + File("TestData.Md5.txt")))
+    {
+        CopyFileToDirectory("source/" + product + ".Tests/TestData.Md5.txt", homeDir);
+    }
+    if (!FileExists(homeDir + File("TestData.Sha1.txt")))
+    {
+        CopyFileToDirectory("source/" + product + ".Tests/TestData.Sha1.txt", homeDir);
+    }
+});
+
+Task("Run-Unit-Tests-Under-AnyCPU")
+    .IsDependentOn("Prepare-Unit-Test-Data")
     .Does(() =>
 {
     CreateDirectory(reportXUnitDirAnyCPU);
