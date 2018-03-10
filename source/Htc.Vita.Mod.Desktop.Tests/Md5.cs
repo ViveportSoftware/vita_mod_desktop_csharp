@@ -1,26 +1,25 @@
 ﻿using System;
 using System.IO;
-using Htc.Vita.Core.Crypto;
 using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public partial class TestCase
+    public static class Md5
     {
         [Fact]
-        public void Md5Impl_0_GetInstance()
+        public static void Default_0_GetInstance()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
         }
 
         [Fact]
-        public void Md5Impl_1_GenerateInBase64_WithContent()
+        public static void Default_1_GenerateInBase64_WithContent()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var value = md5.GenerateInBase64("");
             Assert.Equal("1B2M2Y8AsgTpgAmY7PhCfg==", value);
@@ -29,10 +28,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_1_GenerateInBase64_WithFile()
+        public static void Default_1_GenerateInBase64_WithFile()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             const string path = @"%USERPROFILE%\TestData.Md5.txt";
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
@@ -40,20 +39,20 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_2_ValidateInBase64_WithContent()
+        public static void Default_2_ValidateInBase64_WithContent()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             Assert.True(md5.ValidateInBase64("", "1B2M2Y8AsgTpgAmY7PhCfg=="));
             Assert.True(md5.ValidateInBase64("123", "ICy5YqxZB1uWSwcVLSNLcA=="));
         }
 
         [Fact]
-        public void Md5_Default_2_ValidateInBase64_WithFile()
+        public static void Default_2_ValidateInBase64_WithFile()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             const string path = @"%USERPROFILE%\TestData.Md5.txt";
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
@@ -61,10 +60,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_3_GenerateInHex_WithContent()
+        public static void Default_3_GenerateInHex_WithContent()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var value = md5.GenerateInHex("");
             Assert.Equal("d41d8cd98f00b204e9800998ecf8427e", value);
@@ -73,10 +72,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_3_GenerateInHex_WithFile()
+        public static void Default_3_GenerateInHex_WithFile()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             const string path = @"%USERPROFILE%\TestData.Md5.txt";
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
@@ -84,20 +83,20 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_4_ValidateInHex_WithContent()
+        public static void Default_4_ValidateInHex_WithContent()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             Assert.True(md5.ValidateInHex("", "d41d8cd98f00b204e9800998ecf8427e"));
             Assert.True(md5.ValidateInHex("123", "202cb962ac59075b964b07152d234b70"));
         }
 
         [Fact]
-        public void Md5_Default_4_ValidateInHex_WithFile()
+        public static void Default_4_ValidateInHex_WithFile()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             const string path = @"%USERPROFILE%\TestData.Md5.txt";
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
@@ -105,10 +104,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_5_ValidateInAll_WithContent()
+        public static void Default_5_ValidateInAll_WithContent()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             Assert.True(md5.ValidateInAll("", "1B2M2Y8AsgTpgAmY7PhCfg=="));
             Assert.True(md5.ValidateInAll("123", "ICy5YqxZB1uWSwcVLSNLcA=="));
@@ -117,10 +116,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void Md5_Default_5_ValidateInAll_WithFile()
+        public static void Default_5_ValidateInAll_WithFile()
         {
-            Md5.Register<Md5Impl>();
-            var md5 = Md5.GetInstance();
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             const string path = @"%USERPROFILE%\TestData.Md5.txt";
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
