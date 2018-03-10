@@ -32,7 +32,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             Assert.NotSame(logger, loggerAlt);
         }
@@ -68,7 +68,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             logger.Debug("Default test debug message");
             loggerAlt.Debug("Default test debug message in TestCase");
@@ -108,7 +108,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             logger.Error("Default test error message");
             loggerAlt.Error("Default test error message in TestCase", new Exception("TestCase"));
@@ -148,7 +148,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             logger.Fatal("Default test fatal message");
             loggerAlt.Fatal("Default test fatal message in TestCase", new Exception("TestCase"));
@@ -188,7 +188,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             logger.Info("Default test info message");
             loggerAlt.Info("Default test info message in TestCase", new Exception("TestCase"));
@@ -228,7 +228,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             logger.Trace("Default test trace message");
             loggerAlt.Trace("Default test trace message in TestCase", new Exception("TestCase"));
@@ -268,7 +268,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
             Assert.NotNull(logger);
-            var loggerAlt = Logger.GetInstance(typeof(TestCase));
+            var loggerAlt = Logger.GetInstance(typeof(Log4Net));
             Assert.NotNull(loggerAlt);
             logger.Warn("Default test warn message");
             loggerAlt.Warn("Default test warn message in TestCase", new Exception("TestCase"));
