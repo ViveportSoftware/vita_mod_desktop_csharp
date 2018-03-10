@@ -7,10 +7,10 @@ using Xunit;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public partial class TestCase
+    public static class JsonNet
     {
         [Fact]
-        public void JsonFactoryImpl_0_GetInstance()
+        public static void Default_0_GetInstance()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -18,7 +18,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_1_CreateJsonArray()
+        public static void Default_1_CreateJsonArray()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -29,7 +29,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_2_CreateJsonObject()
+        public static void Default_2_CreateJsonObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -40,7 +40,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject()
+        public static void Default_3_DeserializeObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -54,7 +54,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject_WithBoolAndInt()
+        public static void Default_3_DeserializeObject_WithBoolAndInt()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -68,7 +68,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject_WithEmpty()
+        public static void Default_3_DeserializeObject_WithEmpty()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -82,7 +82,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject_WithNull()
+        public static void Default_3_DeserializeObject_WithNull()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -95,7 +95,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject_AsList()
+        public static void Default_3_DeserializeObject_AsList()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -117,7 +117,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject_AsDictionary()
+        public static void Default_3_DeserializeObject_AsDictionary()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -131,7 +131,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_3_DeserializeObject_AsListOfDictionary()
+        public static void Default_3_DeserializeObject_AsListOfDictionary()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -153,7 +153,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_4_GetJsonArray()
+        public static void Default_4_GetJsonArray()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -164,7 +164,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactoryImpl_5_GetJsonObject()
+        public static void Default_5_GetJsonObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -175,7 +175,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactory_Default_6_SerializeObject()
+        public static void Default_6_SerializeObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -193,7 +193,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactory_Default_6_SerializeObject_WithList()
+        public static void Default_6_SerializeObject_WithList()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -218,7 +218,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactory_Default_6_SerializeObject_WithDictionary()
+        public static void Default_6_SerializeObject_WithDictionary()
         {
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
@@ -235,7 +235,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonFactory_Default_6_SerializeObject_WithListOfDictionary()
+        public static void Default_6_SerializeObject_WithListOfDictionary()
         {
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
@@ -262,7 +262,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_00_InsertBool()
+        public static void JsonArray_00_InsertBool()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -276,7 +276,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_01_InsertDouble()
+        public static void JsonArray_01_InsertDouble()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -290,7 +290,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_02_InsertFloat()
+        public static void JsonArray_02_InsertFloat()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -304,7 +304,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_03_InsertInt()
+        public static void JsonArray_03_InsertInt()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -318,7 +318,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_04_InsertLong()
+        public static void JsonArray_04_InsertLong()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -332,7 +332,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_05_InsertString()
+        public static void JsonArray_05_InsertString()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -346,7 +346,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_06_InsertJsonArray()
+        public static void JsonArray_06_InsertJsonArray()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -362,7 +362,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_07_InsertJsonObject()
+        public static void JsonArray_07_InsertJsonObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -378,7 +378,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_08_ParseBool()
+        public static void JsonArray_08_ParseBool()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -395,7 +395,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_09_ParseDouble()
+        public static void JsonArray_09_ParseDouble()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -412,7 +412,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_10_ParseFloat()
+        public static void JsonArray_10_ParseFloat()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -429,7 +429,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_11_ParseInt()
+        public static void JsonArray_11_ParseInt()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -446,7 +446,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_12_ParseLong()
+        public static void JsonArray_12_ParseLong()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -463,7 +463,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_13_ParseString()
+        public static void JsonArray_13_ParseString()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -477,7 +477,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_14_ParseJsonArray()
+        public static void JsonArray_14_ParseJsonArray()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -493,7 +493,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_15_ParseJsonObject()
+        public static void JsonArray_15_ParseJsonObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -509,7 +509,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonArrayImpl_16_Size()
+        public static void JsonArray_16_Size()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -524,7 +524,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_00_PutBool()
+        public static void JsonObject_00_PutBool()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -538,7 +538,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_01_PutDouble()
+        public static void JsonObject_01_PutDouble()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -552,7 +552,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_02_PutFloat()
+        public static void JsonObject_02_PutFloat()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -566,7 +566,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_03_PutInt()
+        public static void JsonObject_03_PutInt()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -580,7 +580,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_04_PutLong()
+        public static void JsonObject_04_PutLong()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -594,7 +594,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_05_PutString()
+        public static void JsonObject_05_PutString()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -608,7 +608,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_06_PutJsonArray()
+        public static void JsonObject_06_PutJsonArray()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -624,7 +624,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_07_PutJsonObject()
+        public static void JsonObject_07_PutJsonObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -640,7 +640,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_08_ParseBool()
+        public static void JsonObject_08_ParseBool()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -657,7 +657,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_09_ParseDouble()
+        public static void JsonObject_09_ParseDouble()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -674,7 +674,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_10_ParseFloat()
+        public static void JsonObject_10_ParseFloat()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -691,7 +691,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_11_ParseInt()
+        public static void JsonObject_11_ParseInt()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -708,7 +708,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_12_ParseLong()
+        public static void JsonObject_12_ParseLong()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -725,7 +725,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_13_ParseString()
+        public static void JsonObject_13_ParseString()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -739,7 +739,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_14_ParseJsonArray()
+        public static void JsonObject_14_ParseJsonArray()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -755,7 +755,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_15_ParseJsonObject()
+        public static void JsonObject_15_ParseJsonObject()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -771,7 +771,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_16_HasKey()
+        public static void JsonObject_16_HasKey()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
@@ -786,7 +786,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public void JsonObjectImpl_17_AllKeys()
+        public static void JsonObject_17_AllKeys()
         {
             JsonFactory.Register<JsonFactoryImpl>();
             var jsonFactory = JsonFactory.GetInstance();
