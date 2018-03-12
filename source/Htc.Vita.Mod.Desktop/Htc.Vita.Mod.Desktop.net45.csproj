@@ -45,7 +45,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Htc.Vita.Core, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Htc.Vita.Core.0.9.4\lib\net45\Htc.Vita.Core.dll</HintPath>
+      <HintPath>..\packages\Htc.Vita.Core.0.9.4.2\lib\net45\Htc.Vita.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
