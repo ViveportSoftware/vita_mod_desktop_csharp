@@ -1,6 +1,7 @@
 ﻿using System;
 using Htc.Vita.Core.Json;
 using Htc.Vita.Core.Log;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Htc.Vita.Mod.Desktop.JsonNet
@@ -278,12 +279,12 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
 
         protected override string OnToPrettyString()
         {
-            return ToString();
+            return _jArray?.ToString(Formatting.Indented) ?? "";
         }
 
         public override string ToString()
         {
-            return _jArray?.ToString() ?? "";
+            return _jArray?.ToString(Formatting.None) ?? "";
         }
     }
 }
