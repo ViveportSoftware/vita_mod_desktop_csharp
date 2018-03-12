@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Htc.Vita.Core.Json;
 using Htc.Vita.Core.Log;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Htc.Vita.Mod.Desktop.JsonNet
@@ -237,12 +238,12 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
 
         protected override string OnToPrettyString()
         {
-            return ToString();
+            return _jObject?.ToString(Formatting.Indented) ?? "";
         }
 
         public override string ToString()
         {
-            return _jObject?.ToString() ?? "";
+            return _jObject?.ToString(Formatting.None) ?? "";
         }
     }
 }
