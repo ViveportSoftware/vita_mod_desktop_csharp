@@ -7,7 +7,7 @@ using Org.BouncyCastle.Crypto.Digests;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
-    public class Sha1Impl : Sha1
+    public partial class Sha1Impl : Sha1
     {
         private static bool UsingBouncyCastleFirst { get; set; } = true;
 
@@ -96,12 +96,12 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
         private static string DoGenerateInBase64(FileInfo file)
         {
-            return Convert.ToBase64String(GetDigestInByteArray(file));
+            return Core.Util.Convert.ToBase64String(GetDigestInByteArray(file));
         }
 
         private static string DoGenerateInBase64(string content)
         {
-            return Convert.ToBase64String(GetDigestInByteArray(content));
+            return Core.Util.Convert.ToBase64String(GetDigestInByteArray(content));
         }
 
         private static string DoGenerateInHex(FileInfo file)
