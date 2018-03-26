@@ -10,12 +10,12 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     {
         private static async Task<string> DoGenerateInBase64Async(FileInfo file)
         {
-            return Core.Util.Convert.ToBase64String(await GetDigestInByteArrayAsync(file));
+            return Core.Util.Convert.ToBase64String(await GetDigestInByteArrayAsync(file).ConfigureAwait(false));
         }
 
         private static async Task<string> DoGenerateInHexAsync(FileInfo file)
         {
-            return Core.Util.Convert.ToHexString(await GetDigestInByteArrayAsync(file));
+            return Core.Util.Convert.ToHexString(await GetDigestInByteArrayAsync(file).ConfigureAwait(false));
         }
 
         private static async Task<byte[]> GetDigestInByteArrayAsync(FileInfo file)
@@ -26,7 +26,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                 var output = new byte[digest.GetDigestSize()];
                 var buffer = new byte[131072]; // 128K
                 int read;
-                while ((read = await readStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                while ((read = await readStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) > 0)
                 {
                     digest.BlockUpdate(buffer, 0, read);
                 }
