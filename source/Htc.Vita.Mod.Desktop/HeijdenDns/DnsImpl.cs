@@ -34,6 +34,17 @@ namespace Htc.Vita.Mod.Desktop.HeijdenDns
             };
         }
 
+        protected override bool OnFlushCache()
+        {
+            _resolver.ClearCache();
+            return true;
+        }
+
+        protected override bool OnFlushCache(string hostName)
+        {
+            return false;
+        }
+
         protected override IPAddress[] OnGetHostAddresses(string hostNameOrAddress)
         {
             return _resolver.GetHostAddresses(hostNameOrAddress);
