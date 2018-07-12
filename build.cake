@@ -28,7 +28,7 @@ var projectUrl = "https://github.com/ViveportSoftware/vita_mod_desktop_csharp/";
 var description = "HTC Vita Desktop Mod module";
 var nugetDependencies = new []
 {
-        new NuSpecDependency { Id = "BouncyCastle", Version = "1.8.1" },
+        new NuSpecDependency { Id = "BouncyCastle", Version = "1.8.2" },
         new NuSpecDependency { Id = "Heijden.Dns", Version = "2.0.0" },
         new NuSpecDependency { Id = "Htc.Vita.Core", Version = "0.9.6" },
         new NuSpecDependency { Id = "log4net", Version = "2.0.5" },
