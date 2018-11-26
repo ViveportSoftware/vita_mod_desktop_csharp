@@ -8,7 +8,7 @@ using Org.BouncyCastle.Crypto.Digests;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
-    public partial class Md5Impl
+    public partial class Sha256Impl
     {
         private static async Task<string> DoGenerateInBase64Async(FileInfo file, CancellationToken cancellationToken)
         {
@@ -30,7 +30,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
         {
             using (var readStream = file.OpenRead())
             {
-                var digest = new MD5Digest();
+                var digest = new Sha256Digest();
                 var output = new byte[digest.GetDigestSize()];
                 var buffer = new byte[BufferSizeInByte];
                 int read;
@@ -53,7 +53,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
             try
             {
-                return await DefaultMd5.DoGenerateInBase64Async(file, cancellationToken).ConfigureAwait(false);
+                return await DefaultSha256.DoGenerateInBase64Async(file, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Md5Impl)).Fatal("Generating checksum by system in async error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system in async error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return await DoGenerateInBase64Async(file, cancellationToken).ConfigureAwait(false);
@@ -77,7 +77,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
             try
             {
-                return await DefaultMd5.DoGenerateInHexAsync(file, cancellationToken).ConfigureAwait(false);
+                return await DefaultSha256.DoGenerateInHexAsync(file, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -86,7 +86,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Md5Impl)).Fatal("Generating checksum by system in async error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system in async error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return await DoGenerateInHexAsync(file, cancellationToken).ConfigureAwait(false);

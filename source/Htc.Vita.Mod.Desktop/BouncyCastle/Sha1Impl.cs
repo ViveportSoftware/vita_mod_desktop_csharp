@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using Htc.Vita.Core.Crypto;
 using Htc.Vita.Core.Log;
 using Org.BouncyCastle.Crypto.Digests;
@@ -9,18 +10,16 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
     public partial class Sha1Impl : Sha1
     {
+        private const int BufferSizeInByte = 1024 * 128;
+
         private static bool UsingBouncyCastleFirst { get; set; } = true;
 
-        private readonly Logger _logger;
-
-        public Sha1Impl()
+        private static string DoGenerateInBase64(FileInfo file, CancellationToken cancellationToken)
         {
-            _logger = Logger.GetInstance();
-        }
-
-        private static string DoGenerateInBase64(FileInfo file)
-        {
-            return Core.Util.Convert.ToBase64String(GetDigestInByteArray(file));
+            return Core.Util.Convert.ToBase64String(GetDigestInByteArray(
+                    file,
+                    cancellationToken
+            ));
         }
 
         private static string DoGenerateInBase64(string content)
@@ -28,9 +27,12 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return Core.Util.Convert.ToBase64String(GetDigestInByteArray(content));
         }
 
-        private static string DoGenerateInHex(FileInfo file)
+        private static string DoGenerateInHex(FileInfo file, CancellationToken cancellationToken)
         {
-            return Core.Util.Convert.ToHexString(GetDigestInByteArray(file));
+            return Core.Util.Convert.ToHexString(GetDigestInByteArray(
+                    file,
+                    cancellationToken
+            ));
         }
 
         private static string DoGenerateInHex(string content)
@@ -38,16 +40,17 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return Core.Util.Convert.ToHexString(GetDigestInByteArray(content));
         }
 
-        private static byte[] GetDigestInByteArray(FileInfo file)
+        private static byte[] GetDigestInByteArray(FileInfo file, CancellationToken cancellationToken)
         {
             using (var readStream = file.OpenRead())
             {
                 var digest = new Sha1Digest();
                 var output = new byte[digest.GetDigestSize()];
-                var buffer = new byte[131072]; // 128K
+                var buffer = new byte[BufferSizeInByte];
                 int read;
                 while ((read = readStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     digest.BlockUpdate(buffer, 0, read);
                 }
                 digest.DoFinal(output, 0);
@@ -65,23 +68,28 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return output;
         }
 
-        protected override string OnGenerateInBase64(FileInfo file)
+        protected override string OnGenerateInBase64(FileInfo file, CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
             {
-                return DoGenerateInBase64(file);
+                return DoGenerateInBase64(file, cancellationToken);
             }
 
             try
             {
-                return DefaultSha1.DoGenerateInBase64(file);
+                return DefaultSha1.DoGenerateInBase64(file, cancellationToken);
             }
             catch (Exception e)
             {
-                _logger.Fatal("Generating checksum by system error: " + e);
+                if (e is OperationCanceledException)
+                {
+                    throw;
+                }
+
+                Logger.GetInstance(typeof(Sha1Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
-            return DoGenerateInBase64(file);
+            return DoGenerateInBase64(file, cancellationToken);
         }
 
         protected override string OnGenerateInBase64(string content)
@@ -97,29 +105,34 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             }
             catch (Exception e)
             {
-                _logger.Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha1Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(content);
         }
 
-        protected override string OnGenerateInHex(FileInfo file)
+        protected override string OnGenerateInHex(FileInfo file, CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
             {
-                return DoGenerateInHex(file);
+                return DoGenerateInHex(file, cancellationToken);
             }
 
             try
             {
-                return DefaultSha1.DoGenerateInHex(file);
+                return DefaultSha1.DoGenerateInHex(file, cancellationToken);
             }
             catch (Exception e)
             {
-                _logger.Fatal("Generating checksum by system error: " + e);
+                if (e is OperationCanceledException)
+                {
+                    throw;
+                }
+
+                Logger.GetInstance(typeof(Sha1Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
-            return DoGenerateInHex(file);
+            return DoGenerateInHex(file, cancellationToken);
         }
 
         protected override string OnGenerateInHex(string content)
@@ -135,7 +148,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             }
             catch (Exception e)
             {
-                _logger.Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha1Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(content);

@@ -2,13 +2,14 @@
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Htc.Vita.Core.Crypto;
 using Htc.Vita.Core.Log;
 using Org.BouncyCastle.Crypto.Digests;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
-    public partial class Md5Impl : Md5
+    public partial class Sha256Impl : Sha256
     {
         private const int BufferSizeInByte = 1024 * 128;
 
@@ -44,7 +45,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
         {
             using (var readStream = file.OpenRead())
             {
-                var digest = new MD5Digest();
+                var digest = new Sha256Digest();
                 var output = new byte[digest.GetDigestSize()];
                 var buffer = new byte[BufferSizeInByte];
                 int read;
@@ -60,7 +61,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
         private static byte[] GetDigestInByteArray(string content)
         {
-            var digest = new MD5Digest();
+            var digest = new Sha256Digest();
             var input = Encoding.UTF8.GetBytes(content);
             var output = new byte[digest.GetDigestSize()];
             digest.BlockUpdate(input, 0, input.Length);
@@ -77,7 +78,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
             try
             {
-                return DefaultMd5.DoGenerateInBase64(file, cancellationToken);
+                return DefaultSha256.DoGenerateInBase64(file, cancellationToken);
             }
             catch (Exception e)
             {
@@ -86,7 +87,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Md5Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(file, cancellationToken);
@@ -101,11 +102,11 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
             try
             {
-                return DefaultMd5.DoGenerateInBase64(content);
+                return DefaultSha256.DoGenerateInBase64(content);
             }
             catch (Exception e)
             {
-                Logger.GetInstance(typeof(Md5Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(content);
@@ -120,7 +121,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
             try
             {
-                return DefaultMd5.DoGenerateInHex(file, cancellationToken);
+                return DefaultSha256.DoGenerateInHex(file, cancellationToken);
             }
             catch (Exception e)
             {
@@ -129,7 +130,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Md5Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(file, cancellationToken);
@@ -144,11 +145,11 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
 
             try
             {
-                return DefaultMd5.DoGenerateInHex(content);
+                return DefaultSha256.DoGenerateInHex(content);
             }
             catch (Exception e)
             {
-                Logger.GetInstance(typeof(Md5Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(content);
