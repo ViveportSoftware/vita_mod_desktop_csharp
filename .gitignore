@@ -1,5 +1,6 @@
 # folders
 dist/
+packages/
 source/.vs/
 source/generated/
 source/packages/
@@ -8,6 +9,7 @@ tools/*
 
 # files
 *.log
+*.sln.DotSettings.user
 *.userprefs
 .DS_Store
 

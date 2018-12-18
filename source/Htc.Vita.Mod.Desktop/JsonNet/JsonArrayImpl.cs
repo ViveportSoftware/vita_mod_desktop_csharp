@@ -9,12 +9,10 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
     public class JsonArrayImpl : JsonArray
     {
         private readonly JArray _jArray;
-        private readonly Logger _logger;
 
         public JsonArrayImpl(JArray jArray)
         {
             _jArray = jArray;
-            _logger = Logger.GetInstance();
         }
 
         public JArray GetInnerInstance()
@@ -70,7 +68,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not append JsonArray");
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not append JsonArray");
             }
             return this;
         }
@@ -87,7 +85,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not append JsonObject");
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not append JsonObject");
             }
             return this;
         }
@@ -140,7 +138,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not put JsonArray by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not put JsonArray by index: " + index);
             }
             return this;
         }
@@ -157,7 +155,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not put JsonObject by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not put JsonObject by index: " + index);
             }
             return this;
         }
@@ -171,7 +169,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse bool value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse bool value by index: " + index);
             }
             return result;
         }
@@ -185,7 +183,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse double value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse double value by index: " + index);
             }
             return result;
         }
@@ -199,7 +197,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse float value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse float value by index: " + index);
             }
             return result;
         }
@@ -213,7 +211,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse int value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse int value by index: " + index);
             }
             return result;
         }
@@ -227,7 +225,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse long value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse long value by index: " + index);
             }
             return result;
         }
@@ -241,7 +239,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse string value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse string value by index: " + index);
             }
             return result;
         }
@@ -254,7 +252,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse JArray value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse JArray value by index: " + index);
             }
             return null;
         }
@@ -267,7 +265,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse JObject value by index: " + index);
+                Logger.GetInstance(typeof(JsonArrayImpl)).Error("Can not parse JObject value by index: " + index);
             }
             return null;
         }
