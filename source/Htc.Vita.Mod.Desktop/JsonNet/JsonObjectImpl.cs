@@ -11,12 +11,10 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
     public class JsonObjectImpl : JsonObject
     {
         private readonly JObject _jObject;
-        private readonly Logger _logger;
 
         public JsonObjectImpl(JObject jObject)
         {
             _jObject = jObject;
-            _logger = Logger.GetInstance();
         }
 
         public JObject GetInnerInstance()
@@ -47,7 +45,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse bool value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse bool value by key: " + key);
             }
             return result;
         }
@@ -61,7 +59,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse double value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse double value by key: " + key);
             }
             return result;
         }
@@ -75,7 +73,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse float value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse float value by key: " + key);
             }
             return result;
         }
@@ -89,7 +87,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse int value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse int value by key: " + key);
             }
             return result;
         }
@@ -103,7 +101,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse long value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse long value by key: " + key);
             }
             return result;
         }
@@ -117,7 +115,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse string value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse string value by key: " + key);
             }
             return result;
         }
@@ -130,7 +128,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse JArray value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse JArray value by key: " + key);
             }
             return null;
         }
@@ -143,7 +141,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not parse JObject value by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not parse JObject value by key: " + key);
             }
             return null;
         }
@@ -214,7 +212,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not put JsonArray by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not put JsonArray by key: " + key);
             }
             return this;
         }
@@ -231,7 +229,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                _logger.Error("Can not put JsonObject by key: " + key);
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error("Can not put JsonObject by key: " + key);
             }
             return this;
         }

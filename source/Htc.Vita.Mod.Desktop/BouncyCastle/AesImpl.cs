@@ -17,7 +17,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             {
                 return new CbcBlockCipher(new AesEngine());
             }
-            Logger.GetInstance().Error("unknown cipher mode: " + cipherMode);
+            Logger.GetInstance(typeof(AesImpl)).Error("unknown cipher mode: " + cipherMode);
             return new CbcBlockCipher(new AesEngine());
         }
 
@@ -27,7 +27,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             {
                 return new Pkcs7Padding();
             }
-            Logger.GetInstance().Error("unknown padding mode: " + paddingMode);
+            Logger.GetInstance(typeof(AesImpl)).Error("unknown padding mode: " + paddingMode);
             return new Pkcs7Padding();
         }
 

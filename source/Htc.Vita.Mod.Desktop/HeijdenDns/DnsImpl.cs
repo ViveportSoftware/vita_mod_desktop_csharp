@@ -24,7 +24,7 @@ namespace Htc.Vita.Mod.Desktop.HeijdenDns
             }
             catch (Exception e)
             {
-                Logger.GetInstance().Warn("[DnsImpl] Creating dns resolver error: " + e);
+                Logger.GetInstance(typeof(DnsImpl)).Warn("[DnsImpl] Creating dns resolver error: " + e);
             }
             _resolver = new Resolver
             {
