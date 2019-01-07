@@ -78,6 +78,7 @@
     <Compile Include="JsonNet\JsonFactoryImpl.cs" />
     <Compile Include="JsonNet\JsonObjectImpl.cs" />
     <Compile Include="Log4Net\LoggerImpl.cs" />
+    <Compile Include="Log4Net\TraceListenerImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

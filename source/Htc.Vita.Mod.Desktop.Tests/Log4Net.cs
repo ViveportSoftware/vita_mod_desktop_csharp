@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Htc.Vita.Core.Log;
 using Htc.Vita.Mod.Desktop.Log4Net;
 using Xunit;
@@ -115,6 +116,21 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.NotNull(logger);
             Assert.NotNull(loggerAlt);
             Assert.NotSame(logger, loggerAlt);
+        }
+
+        [Fact]
+        public static void Default_2_Error_WithTrace()
+        {
+            Logger.Register<LoggerImpl>();
+            var logger = Logger.GetInstance();
+            Assert.NotNull(logger);
+            var traceListenerImpl = new TraceListenerImpl();
+            Debug.Listeners.Add(traceListenerImpl);
+            Trace.Listeners.Add(traceListenerImpl);
+            logger.Error("Default test error message");
+            Assert.NotNull(logger);
+            Debug.WriteLine("Verifying Debug.WriteLine went to log");
+            Trace.WriteLine("Verifying Trace.WriteLine went to log");
         }
 
         [Fact]
@@ -278,7 +294,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public static void Default_7_Shutdown()
+        public static void Default_8_Shutdown()
         {
             Logger.Register<LoggerImpl>();
             var logger = Logger.GetInstance();
