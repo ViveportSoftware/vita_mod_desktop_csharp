@@ -35,4 +35,4 @@ Test-time dependencies:
 
 Build-time Prerequisite (Windows):
 
-* Microsoft Visual Studio 2015
+* Microsoft Visual Studio 2017

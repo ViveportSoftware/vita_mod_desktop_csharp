@@ -23,17 +23,6 @@ var companyName = "HTC";
 var version = "0.10.0";
 var semanticVersion = string.Format("{0}.{1}", version, revision);
 var ciVersion = string.Format("{0}.{1}", version, "0");
-var nugetTags = new [] {"htc", "vita", "mod", "desktop"};
-var projectUrl = "https://github.com/ViveportSoftware/vita_mod_desktop_csharp/";
-var description = "HTC Vita Desktop Mod module";
-var nugetDependencies = new []
-{
-        new NuSpecDependency { Id = "BouncyCastle", Version = "1.8.2" },
-        new NuSpecDependency { Id = "Heijden.Dns", Version = "2.0.0" },
-        new NuSpecDependency { Id = "Htc.Vita.Core", Version = "0.9.14" },
-        new NuSpecDependency { Id = "log4net", Version = "2.0.5" },
-        new NuSpecDependency { Id = "Newtonsoft.Json", Version = "7.0.1" }
-};
 
 // Define copyright
 var copyright = string.Format("Copyright © 2017 - {0}", DateTime.Now.Year);
@@ -145,22 +134,11 @@ Task("Build-Assemblies")
     .IsDependentOn("Generate-AssemblyInfo")
     .Does(() =>
 {
-    if(IsRunningOnWindows())
+    var settings = new DotNetCoreBuildSettings
     {
-        // Use MSBuild
-        MSBuild(
-                solutionFile,
-                settings => settings.SetConfiguration(configuration)
-        );
-    }
-    else
-    {
-        // Use XBuild
-        XBuild(
-                solutionFile,
-                settings => settings.SetConfiguration(configuration)
-        );
-    }
+            Configuration = configuration
+    };
+    DotNetCoreBuild("./source/", settings);
 });
 
 Task("Prepare-Unit-Test-Data")
@@ -188,8 +166,9 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                 tool =>
                 {
                         tool.XUnit2(
-                                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/*.Tests.dll",
-                                new XUnit2Settings {
+                                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll",
+                                new XUnit2Settings
+                                {
                                         Parallelism = ParallelismOption.All,
                                         HtmlReport = true,
                                         NUnitReport = true,
@@ -198,16 +177,22 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                         );
                 },
                 new FilePath(reportDotCoverDirAnyCPU.ToString() + "/" + product + ".html"),
-                new DotCoverAnalyseSettings {
+                new DotCoverAnalyseSettings
+                {
                         ReportType = DotCoverReportType.HTML
-                }
+                }.WithFilter("+:*")
+                .WithFilter("-:xunit.*")
+                .WithFilter("-:*.NunitTest")
+                .WithFilter("-:*.Tests")
+                .WithFilter("-:*.XunitTest")
         );
     }
     else
     {
         XUnit2(
-                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/*.Tests.dll",
-                new XUnit2Settings {
+                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll",
+                new XUnit2Settings
+                {
                         Parallelism = ParallelismOption.All,
                         HtmlReport = true,
                         NUnitReport = true,
@@ -228,8 +213,9 @@ Task("Run-Unit-Tests-Under-X86")
                 tool =>
                 {
                         tool.XUnit2(
-                                "./temp/" + configuration + "/" + product + ".Tests/bin/x86/*.Tests.dll",
-                                new XUnit2Settings {
+                                "./temp/" + configuration + "/" + product + ".Tests/bin/x86/net452/*.Tests.dll",
+                                new XUnit2Settings
+                                {
                                         Parallelism = ParallelismOption.All,
                                         HtmlReport = true,
                                         NUnitReport = true,
@@ -239,16 +225,22 @@ Task("Run-Unit-Tests-Under-X86")
                         );
                 },
                 new FilePath(reportDotCoverDirX86.ToString() + "/" + product + ".html"),
-                new DotCoverAnalyseSettings {
+                new DotCoverAnalyseSettings
+                {
                         ReportType = DotCoverReportType.HTML
-                }
+                }.WithFilter("+:*")
+                .WithFilter("-:xunit.*")
+                .WithFilter("-:*.NunitTest")
+                .WithFilter("-:*.Tests")
+                .WithFilter("-:*.XunitTest")
         );
     }
     else
     {
         XUnit2(
-                "./temp/" + configuration + "/" + product + ".Tests/bin/x86/*.Tests.dll",
-                new XUnit2Settings {
+                "./temp/" + configuration + "/" + product + ".Tests/bin/x86/net452/*.Tests.dll",
+                new XUnit2Settings
+                {
                         Parallelism = ParallelismOption.All,
                         HtmlReport = true,
                         NUnitReport = true,
@@ -267,7 +259,8 @@ Task("Run-DupFinder")
     {
         DupFinder(
                 string.Format("./source/{0}.sln", product),
-                new DupFinderSettings() {
+                new DupFinderSettings()
+                {
                         ShowStats = true,
                         ShowText = true,
                         OutputFile = new FilePath(reportReSharperDupFinder.ToString() + "/" + product + ".xml"),
@@ -289,7 +282,8 @@ Task("Run-InspectCode")
     {
         InspectCode(
                 string.Format("./source/{0}.sln", product),
-                new InspectCodeSettings() {
+                new InspectCodeSettings()
+                {
                         SolutionWideAnalysis = true,
                         OutputFile = new FilePath(reportReSharperInspectCode.ToString() + "/" + product + ".xml"),
                         ThrowExceptionOnFindingViolations = false
@@ -359,39 +353,18 @@ Task("Build-NuGet-Package")
         nugetPackVersion = string.Format("{0}-CI{1}", ciVersion, revision);
     }
     Information("Pack version: {0}", nugetPackVersion);
-    var nuGetPackSettings = new NuGetPackSettings
+    var settings = new DotNetCorePackSettings
     {
-            Id = product,
-            Version = nugetPackVersion,
-            Authors = new[] {"HTC"},
-            Description = description + " [CommitId: " + commitId + "]",
-            Copyright = copyright,
-            ProjectUrl = new Uri(projectUrl),
-            Tags = nugetTags,
-            RequireLicenseAcceptance= false,
-            Files = new []
+            Configuration = configuration,
+            OutputDirectory = nugetDir,
+            NoBuild = true,
+            ArgumentCustomization = (args) =>
             {
-                    new NuSpecContent
-                    {
-                            Source = string.Format("{0}/bin/net45/{0}.dll", product),
-                            Target = "lib\\net45"
-                    },
-                    new NuSpecContent
-                    {
-                            Source = string.Format("{0}/bin/net45/{0}.pdb", product),
-                            Target = "lib\\net45"
-                    }
-            },
-            Dependencies = nugetDependencies,
-            Properties = new Dictionary<string, string>
-            {
-                    {"Configuration", configuration}
-            },
-            BasePath = tempDir + Directory(configuration),
-            OutputDirectory = nugetDir
+                    return args.Append("/p:Version={0}", nugetPackVersion);
+            }
     };
 
-    NuGetPack(nuGetPackSettings);
+    DotNetCorePack("./source/" + product + "/", settings);
 });
 
 Task("Publish-NuGet-Package")

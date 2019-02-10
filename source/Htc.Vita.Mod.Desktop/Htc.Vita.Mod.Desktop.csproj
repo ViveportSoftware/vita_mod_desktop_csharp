@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Htc.Vita.Mod.Desktop</RootNamespace>
+    <AssemblyName>Htc.Vita.Mod.Desktop</AssemblyName>
+    <TargetFramework>net45</TargetFramework>
+    <IntermediateOutputPath>..\..\temp\$(Configuration)\$(AssemblyName)\obj</IntermediateOutputPath>
+    <OutputPath>..\..\temp\$(Configuration)\$(AssemblyName)\bin</OutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>6</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Authors>HTC</Authors>
+    <PackageDescription>HTC Vita Desktop Mod module</PackageDescription>
+    <PackageProjectUrl>https://github.com/ViveportSoftware/vita_mod_desktop_csharp/</PackageProjectUrl>
+    <PackageTags>htc;vita;mod;desktop</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle" Version="1.8.2" />
+    <PackageReference Include="Heijden.Dns" Version="2.0.0" />
+    <PackageReference Include="Htc.Vita.Core" Version="0.9.14" />
+    <PackageReference Include="log4net" Version="2.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="7.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\generated\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
+  </ItemGroup>
+</Project>

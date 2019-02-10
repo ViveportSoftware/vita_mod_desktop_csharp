@@ -1,5 +1,6 @@
 # folders
 dist/
+obj/
 packages/
 source/.vs/
 source/generated/
@@ -8,6 +9,7 @@ temp/
 tools/*
 
 # files
+*.csproj.user
 *.log
 *.sln.DotSettings.user
 *.userprefs
