@@ -1,12 +1,19 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public static class AesFactory
+    public class AesFactory
     {
+        private readonly ITestOutputHelper _output;
+
+        public AesFactory(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public static void Default_0_GetInstance()
         {
@@ -41,7 +48,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public static void Aes_0_Encrypt_WithEmptyInput_WithPassword()
+        public void Aes_0_Encrypt_WithEmptyInput_WithPassword()
         {
             Core.Crypto.AesFactory.Register<AesFactoryImpl>();
             var aesFactory = Core.Crypto.AesFactory.GetInstance();
@@ -54,7 +61,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var outputInBytes = aes.Encrypt(inputInBytes, password);
             Assert.NotNull(outputInBytes);
             var outputInHex = Core.Util.Convert.ToHexString(outputInBytes);
-            Console.WriteLine("outputInHex: " + outputInHex);
+            _output.WriteLine("outputInHex: " + outputInHex);
         }
 
         [Fact]

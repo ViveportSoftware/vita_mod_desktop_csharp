@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Htc.Vita.Core.Json;
 using Htc.Vita.Core.Log;
 using Htc.Vita.Mod.Desktop.JsonNet;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public static class JsonNet
+    public class JsonNet
     {
+        private readonly ITestOutputHelper _output;
+
+        public JsonNet(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public static void Default_0_GetInstance()
         {
@@ -188,7 +195,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             };
             var result = jsonFactory.SerializeObject(class1);
             Assert.NotNull(result);
-            // Console.WriteLine("Serialized string: " + result);
             Assert.Equal("{\"TestBool1\":true,\"TestInt1\":3,\"TestString1\":\"test\"}", result);
         }
 
@@ -213,7 +219,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             classList.Add(class2);
             var result = jsonFactory.SerializeObject(classList);
             Assert.NotNull(result);
-            // Console.WriteLine("Serialized string: " + result);
             Assert.Equal("[{\"TestBool1\":true,\"TestInt1\":3,\"TestString1\":\"test\"},{\"TestBool1\":false,\"TestInt1\":5,\"TestString1\":null}]", result);
         }
 
@@ -230,12 +235,11 @@ namespace Htc.Vita.Mod.Desktop.Tests
             };
             var result = jsonFactory.SerializeObject(dict);
             Assert.NotNull(result);
-            // Console.WriteLine("Serialized string: " + result);
             Assert.Equal("{\"testKey0\":\"testValue0\",\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\"}", result);
         }
 
         [Fact]
-        public static void Default_6_SerializeObject_WithListOfDictionary()
+        public void Default_6_SerializeObject_WithListOfDictionary()
         {
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
@@ -257,7 +261,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
                 dict2
             };
             var result = jsonFactory.SerializeObject(dictList);
-            Console.WriteLine("Serialized string: " + result);
+            _output.WriteLine("Serialized string: " + result);
             Assert.Equal("[{\"testKey0\":\"testValue0\",\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\"},{\"testKey0\":\"testValue3\",\"testKey2\":\"testValue4\",\"testKey4\":\"testValue5\"}]", result);
         }
 
@@ -576,7 +580,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.Equal("{}", jsonObject.ToString());
             jsonObject.Put("key", 1);
             Assert.NotEqual("{}", jsonObject.ToString());
-            Logger.GetInstance().Debug("jsonOject: " + jsonObject);
+            Logger.GetInstance().Debug("jsonObject: " + jsonObject);
         }
 
         [Fact]

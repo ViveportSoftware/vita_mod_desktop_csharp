@@ -1,12 +1,19 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Htc.Vita.Mod.Desktop.HeijdenDns;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public static class HeijdenDns
+    public class HeijdenDns
     {
+        private readonly ITestOutputHelper _output;
+
+        public HeijdenDns(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         [Fact]
         public static void Default_0_GetInstance()
         {
@@ -16,7 +23,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public static void Default_1_GetHostAddresses()
+        public void Default_1_GetHostAddresses()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
@@ -27,7 +34,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.NotEmpty(addresses);
             foreach (var address in addresses)
             {
-                Console.WriteLine("address for \"" + host + "\": " + address);
+                _output.WriteLine("address for \"" + host + "\": " + address);
             }
             var host2 = "172.217.27.132";
             var addresses2 = dns.GetHostAddresses(host2);
@@ -36,7 +43,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var hasSameAddress = false;
             foreach (var address2 in addresses2)
             {
-                Console.WriteLine("address for \"" + host2 + "\": " + address2);
+                _output.WriteLine("address for \"" + host2 + "\": " + address2);
                 if (host2.Equals(address2.ToString()))
                 {
                     hasSameAddress = true;
@@ -46,7 +53,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public static void Default_2_GetHostEntry()
+        public void Default_2_GetHostEntry()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
@@ -54,7 +61,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var host = "8.8.8.8";
             var entry = dns.GetHostEntry(host);
             Assert.NotNull(entry);
-            Console.WriteLine("entry for \"" + host + "\": " + entry.HostName);
+            _output.WriteLine("entry for \"" + host + "\": " + entry.HostName);
             var host2 = "www.google.com";
             var entry2 = dns.GetHostEntry(host2);
             Assert.NotNull(entry2);
@@ -62,7 +69,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         }
 
         [Fact]
-        public static void Default_2_GetHostEntry_WithIPAddress()
+        public void Default_2_GetHostEntry_WithIPAddress()
         {
             Core.Net.Dns.Register<DnsImpl>();
             var dns = Core.Net.Dns.GetInstance();
@@ -70,7 +77,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var host = IPAddress.Parse("8.8.8.8");
             var entry = dns.GetHostEntry(host);
             Assert.NotNull(entry);
-            Console.WriteLine("entry for \"" + host + "\": " + entry.HostName);
+            _output.WriteLine("entry for \"" + host + "\": " + entry.HostName);
         }
     }
 }
