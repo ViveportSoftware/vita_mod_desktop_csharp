@@ -1,3 +1,4 @@
+#addin "nuget:?package=Cake.Coveralls&version=0.9.0"
 #addin "nuget:?package=Cake.Git&version=0.19.0"
 #addin "nuget:?package=Cake.ReSharperReports&version=0.10.0"
 
@@ -43,6 +44,8 @@ var nugetDir = distDir + Directory(configuration) + Directory("nuget");
 var homeDir = Directory(EnvironmentVariable("USERPROFILE") ?? EnvironmentVariable("HOME"));
 var reportDotCoverDirAnyCPU = distDir + Directory(configuration) + Directory("report/dotCover/AnyCPU");
 var reportDotCoverDirX86 = distDir + Directory(configuration) + Directory("report/dotCover/x86");
+var reportOpenCoverDirAnyCPU = distDir + Directory(configuration) + Directory("report/OpenCover/AnyCPU");
+var reportOpenCoverDirX86 = distDir + Directory(configuration) + Directory("report/OpenCover/x86");
 var reportXUnitDirAnyCPU = distDir + Directory(configuration) + Directory("report/xUnit/AnyCPU");
 var reportXUnitDirX86 = distDir + Directory(configuration) + Directory("report/xUnit/x86");
 var reportReSharperDupFinder = distDir + Directory(configuration) + Directory("report/ReSharper/DupFinder");
@@ -53,6 +56,9 @@ var signKeyEnc = EnvironmentVariable("SIGNKEYENC") ?? "NOTSET";
 var signPass = EnvironmentVariable("SIGNPASS") ?? "NOTSET";
 var signSha1Uri = new Uri("http://timestamp.digicert.com");
 var signSha256Uri = new Uri("http://timestamp.digicert.com");
+
+// Define coveralls update key
+var coverallsApiKey = EnvironmentVariable("COVERALLS_APIKEY") ?? "NOTSET";
 
 // Define nuget push source and key
 var nugetApiKey = EnvironmentVariable("NUGET_PUSH_TOKEN") ?? EnvironmentVariable("NUGET_APIKEY") ?? "NOTSET";
@@ -185,6 +191,35 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                 .WithFilter("-:*.NunitTest")
                 .WithFilter("-:*.Tests")
                 .WithFilter("-:*.XunitTest")
+        );
+        CreateDirectory(reportOpenCoverDirAnyCPU);
+        var openCoverSettings = new OpenCoverSettings
+        {
+                MergeByHash = true,
+                NoDefaultFilters = true,
+                Register = "user",
+                SkipAutoProps = true
+        }.WithFilter("+[*]*")
+        .WithFilter("-[xunit.*]*")
+        .WithFilter("-[*.NunitTest]*")
+        .WithFilter("-[*.Tests]*")
+        .WithFilter("-[*.XunitTest]*");
+        OpenCover(
+                tool =>
+                {
+                        tool.XUnit2(
+                                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll",
+                                new XUnit2Settings
+                                {
+                                        Parallelism = ParallelismOption.All,
+                                        HtmlReport = true,
+                                        NUnitReport = true,
+                                        OutputDirectory = reportXUnitDirAnyCPU
+                                }
+                        );
+                },
+                new FilePath(reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".xml"),
+                openCoverSettings
         );
     }
     else
@@ -367,9 +402,23 @@ Task("Build-NuGet-Package")
     DotNetCorePack("./source/" + product + "/", settings);
 });
 
+Task("Update-Coverage-Report")
+    .WithCriteria(() => !"NOTSET".Equals(coverallsApiKey))
+    .IsDependentOn("Build-NuGet-Package")
+    .Does(() =>
+{
+    CoverallsIo(
+            reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".xml",
+            new CoverallsIoSettings()
+            {
+                    RepoToken = coverallsApiKey
+            }
+    );
+});
+
 Task("Publish-NuGet-Package")
     .WithCriteria(() => "Release".Equals(configuration) && !"NOTSET".Equals(nugetApiKey) && !"NOTSET".Equals(nugetSource))
-    .IsDependentOn("Build-NuGet-Package")
+    .IsDependentOn("Update-Coverage-Report")
     .Does(() =>
 {
     var nugetPushVersion = semanticVersion;
@@ -395,7 +444,7 @@ Task("Publish-NuGet-Package")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Build-NuGet-Package");
+    .IsDependentOn("Update-Coverage-Report");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
