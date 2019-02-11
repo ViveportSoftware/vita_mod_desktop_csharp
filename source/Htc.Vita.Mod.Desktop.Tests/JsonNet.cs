@@ -55,7 +55,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var content = "{\"TestBool1\":true,\"TestInt1\":3,\"TestString1\":\"test\"}";
             var testClass1 = jsonFactory.DeserializeObject<TestClass1>(content);
             Assert.NotNull(testClass1);
-            Assert.Equal(true, testClass1.TestBool1);
+            Assert.True(testClass1.TestBool1);
             Assert.Equal(3, testClass1.TestInt1);
             Assert.Equal("test", testClass1.TestString1);
         }
@@ -69,9 +69,9 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var content = "{\"TestBool1\":true,\"TestInt1\":3}";
             var testClass1 = jsonFactory.DeserializeObject<TestClass1>(content);
             Assert.NotNull(testClass1);
-            Assert.Equal(true, testClass1.TestBool1);
+            Assert.True(testClass1.TestBool1);
             Assert.Equal(3, testClass1.TestInt1);
-            Assert.Equal(null, testClass1.TestString1);
+            Assert.Null(testClass1.TestString1);
         }
 
         [Fact]
@@ -83,9 +83,9 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var content = "{}";
             var testClass1 = jsonFactory.DeserializeObject<TestClass1>(content);
             Assert.NotNull(testClass1);
-            Assert.Equal(false, testClass1.TestBool1);
+            Assert.False(testClass1.TestBool1);
             Assert.Equal(0, testClass1.TestInt1);
-            Assert.Equal(null, testClass1.TestString1);
+            Assert.Null(testClass1.TestString1);
         }
 
         [Fact]
@@ -113,14 +113,14 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.True(classList.Count == 2);
             var testClass0 = classList[0];
             Assert.NotNull(testClass0);
-            Assert.Equal(true, testClass0.TestBool1);
+            Assert.True(testClass0.TestBool1);
             Assert.Equal(3, testClass0.TestInt1);
             Assert.Equal("test", testClass0.TestString1);
             var testClass1 = classList[1];
             Assert.NotNull(testClass1);
-            Assert.Equal(false, testClass1.TestBool1);
+            Assert.False(testClass1.TestBool1);
             Assert.Equal(5, testClass1.TestInt1);
-            Assert.Equal(null, testClass1.TestString1);
+            Assert.Null(testClass1.TestString1);
         }
 
         [Fact]
@@ -392,10 +392,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.Equal("[]", jsonArray.ToString());
             jsonArray.Insert(0, true);
             var value = jsonArray.ParseBool(0);
-            Assert.Equal(true, value);
+            Assert.True(value);
             jsonArray.Insert(1, "true");
             var value2 = jsonArray.ParseBool(1);
-            Assert.Equal(true, value2);
+            Assert.True(value2);
         }
 
         [Fact]
@@ -654,10 +654,10 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.Equal("{}", jsonObject.ToString());
             jsonObject.Put("key", true);
             var value = jsonObject.ParseBool("key");
-            Assert.Equal(true, value);
+            Assert.True(value);
             jsonObject.Put("key2", "true");
             var value2 = jsonObject.ParseBool("key2");
-            Assert.Equal(true, value2);
+            Assert.True(value2);
         }
 
         [Fact]
@@ -785,8 +785,8 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.Equal("{}", jsonObject.ToString());
             jsonObject.Put("key", true);
             Logger.GetInstance().Debug("jsonObject: " + jsonObject);
-            Assert.Equal(true, jsonObject.HasKey("key"));
-            Assert.Equal(false, jsonObject.HasKey("key2"));
+            Assert.True(jsonObject.HasKey("key"));
+            Assert.False(jsonObject.HasKey("key2"));
         }
 
         [Fact]
