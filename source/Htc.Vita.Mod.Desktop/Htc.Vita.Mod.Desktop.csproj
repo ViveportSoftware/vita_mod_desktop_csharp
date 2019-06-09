@@ -27,7 +27,7 @@
     <PackageReference Include="Heijden.Dns" Version="2.0.0" />
     <PackageReference Include="Htc.Vita.Core" Version="0.10.0" />
     <PackageReference Include="log4net" Version="2.0.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="7.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http" />
