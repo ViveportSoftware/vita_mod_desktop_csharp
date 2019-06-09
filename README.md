@@ -8,31 +8,31 @@
 
 Compile-time dependencies:
 
-* [BouncyCastle](https://www.nuget.org/packages/BouncyCastle/)
 * [Heijden.Dns](https://www.nuget.org/packages/Heijden.Dns/)
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
+* [Portable.BouncyCastle](https://www.nuget.org/packages/Portable.BouncyCastle/)
 
 Package-time dependencies: none
 
 Run-time dependencies:
 
 * .NET Framework 4.5
-* [BouncyCastle](https://www.nuget.org/packages/BouncyCastle/)
 * [Heijden.Dns](https://www.nuget.org/packages/Heijden.Dns/)
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
+* [Portable.BouncyCastle](https://www.nuget.org/packages/Portable.BouncyCastle/)
 
 Test-time dependencies:
 
 * .NET Framework 4.5.2
-* [BouncyCastle](https://www.nuget.org/packages/BouncyCastle/)
 * [Heijden.Dns](https://www.nuget.org/packages/Heijden.Dns/)
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
+* [Portable.BouncyCastle](https://www.nuget.org/packages/Portable.BouncyCastle/)
 * [xUnit.net](https://xunit.github.io/)
 
 Build-time Prerequisite (Windows):
