@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Htc.Vita.Core.Log;
 using log4net;
 using log4net.Config;
@@ -11,8 +12,8 @@ namespace Htc.Vita.Mod.Desktop.Log4Net
 
         public LoggerImpl(string name) : base(name)
         {
-            XmlConfigurator.Configure();
-            _log = LogManager.GetLogger(name);
+            XmlConfigurator.Configure(LogManager.GetRepository(Assembly.GetCallingAssembly()));
+            _log = LogManager.GetLogger(Assembly.GetCallingAssembly(), name);
         }
 
         protected override void OnDebug(string tag, string message)
