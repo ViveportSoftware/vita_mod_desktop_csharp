@@ -187,6 +187,7 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                 {
                         ReportType = DotCoverReportType.HTML
                 }.WithFilter("+:*")
+                .WithFilter("-:BouncyCastle.*")
                 .WithFilter("-:xunit.*")
                 .WithFilter("-:*.NunitTest")
                 .WithFilter("-:*.Tests")
@@ -201,6 +202,7 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                 SkipAutoProps = true
         }.WithFilter("+[*]*")
         .WithFilter("-[xunit.*]*")
+        .WithFilter("-[BouncyCastle.*]*")
         .WithFilter("-[*.NunitTest]*")
         .WithFilter("-[*.Tests]*")
         .WithFilter("-[*.XunitTest]*");
@@ -263,6 +265,7 @@ Task("Run-Unit-Tests-Under-X86")
                 {
                         ReportType = DotCoverReportType.HTML
                 }.WithFilter("+:*")
+                .WithFilter("-:BouncyCastle.*")
                 .WithFilter("-:xunit.*")
                 .WithFilter("-:*.NunitTest")
                 .WithFilter("-:*.Tests")
