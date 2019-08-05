@@ -8,7 +8,6 @@
 
 Compile-time dependencies:
 
-* [Heijden.Dns](https://www.nuget.org/packages/Heijden.Dns/)
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
@@ -19,7 +18,6 @@ Package-time dependencies: none
 Run-time dependencies:
 
 * .NET Framework 4.5
-* [Heijden.Dns](https://www.nuget.org/packages/Heijden.Dns/)
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
@@ -28,7 +26,6 @@ Run-time dependencies:
 Test-time dependencies:
 
 * .NET Framework 4.5.2
-* [Heijden.Dns](https://www.nuget.org/packages/Heijden.Dns/)
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
