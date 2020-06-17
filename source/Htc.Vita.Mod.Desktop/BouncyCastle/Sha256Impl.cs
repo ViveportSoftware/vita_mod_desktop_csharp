@@ -8,6 +8,11 @@ using Org.BouncyCastle.Crypto.Digests;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
+    /// <summary>
+    /// Class Sha256Impl.
+    /// Implements the <see cref="Sha256" />
+    /// </summary>
+    /// <seealso cref="Sha256" />
     public partial class Sha256Impl : Sha256
     {
         private const int BufferSizeInByte = 1024 * 128;
@@ -68,6 +73,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return output;
         }
 
+        /// <inheritdoc />
         protected override string OnGenerateInBase64(FileInfo file, CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
@@ -86,12 +92,13 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal($"Generating checksum by system error: {e}");
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(file, cancellationToken);
         }
 
+        /// <inheritdoc />
         protected override string OnGenerateInBase64(string content)
         {
             if (UsingBouncyCastleFirst)
@@ -105,12 +112,13 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             }
             catch (Exception e)
             {
-                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal($"Generating checksum by system error: {e}");
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInBase64(content);
         }
 
+        /// <inheritdoc />
         protected override string OnGenerateInHex(FileInfo file, CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
@@ -129,12 +137,13 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal($"Generating checksum by system error: {e}");
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(file, cancellationToken);
         }
 
+        /// <inheritdoc />
         protected override string OnGenerateInHex(string content)
         {
             if (UsingBouncyCastleFirst)
@@ -148,7 +157,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             }
             catch (Exception e)
             {
-                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal($"Generating checksum by system error: {e}");
                 UsingBouncyCastleFirst = true;
             }
             return DoGenerateInHex(content);

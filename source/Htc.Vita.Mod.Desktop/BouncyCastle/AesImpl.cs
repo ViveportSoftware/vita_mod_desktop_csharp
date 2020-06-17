@@ -9,6 +9,11 @@ using Org.BouncyCastle.Crypto.Parameters;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {
+    /// <summary>
+    /// Class AesImpl.
+    /// Implements the <see cref="Aes" />
+    /// </summary>
+    /// <seealso cref="Aes" />
     public class AesImpl : Aes
     {
         private static IBlockCipher ConvertToImpl(CipherMode cipherMode)
@@ -17,7 +22,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             {
                 return new CbcBlockCipher(new AesEngine());
             }
-            Logger.GetInstance(typeof(AesImpl)).Error("unknown cipher mode: " + cipherMode);
+            Logger.GetInstance(typeof(AesImpl)).Error($"unknown cipher mode: {cipherMode}");
             return new CbcBlockCipher(new AesEngine());
         }
 
@@ -27,10 +32,11 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             {
                 return new Pkcs7Padding();
             }
-            Logger.GetInstance(typeof(AesImpl)).Error("unknown padding mode: " + paddingMode);
+            Logger.GetInstance(typeof(AesImpl)).Error($"unknown padding mode: {paddingMode}");
             return new Pkcs7Padding();
         }
 
+        /// <inheritdoc />
         protected override byte[] OnDecrypt(byte[] input, byte[] key, byte[] iv)
         {
             if (iv == null || iv.Length != IvSize128BitInByte)
@@ -86,6 +92,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return result;
         }
 
+        /// <inheritdoc />
         protected override byte[] OnEncrypt(byte[] input, byte[] key, byte[] iv)
         {
             if (iv == null || iv.Length != IvSize128BitInByte)

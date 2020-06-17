@@ -44,6 +44,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             }
         }
 
+        /// <inheritdoc />
         protected override async Task<string> OnGenerateInBase64Async(FileInfo file, CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
@@ -62,12 +63,13 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system in async error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal($"Generating checksum by system in async error: {e}");
                 UsingBouncyCastleFirst = true;
             }
             return await DoGenerateInBase64Async(file, cancellationToken).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         protected override async Task<string> OnGenerateInHexAsync(FileInfo file, CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
@@ -86,7 +88,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                     throw;
                 }
 
-                Logger.GetInstance(typeof(Sha256Impl)).Fatal("Generating checksum by system in async error: " + e);
+                Logger.GetInstance(typeof(Sha256Impl)).Fatal($"Generating checksum by system in async error: {e}");
                 UsingBouncyCastleFirst = true;
             }
             return await DoGenerateInHexAsync(file, cancellationToken).ConfigureAwait(false);
