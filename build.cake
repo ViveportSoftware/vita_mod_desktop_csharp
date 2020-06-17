@@ -394,7 +394,7 @@ Task("Sign-Assemblies")
     );
     lastSignTimestamp = DateTime.Now;
 
-    file = string.Format("./temp/{0}/{1}/bin/netcoreapp2.1/{1}.dll", configuration, product);
+    file = string.Format("./temp/{0}/{1}/bin/netstandard2.0/{1}.dll", configuration, product);
 
     if (totalTimeInMilli < signIntervalInMilli)
     {
