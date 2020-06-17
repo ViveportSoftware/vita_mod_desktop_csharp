@@ -33,7 +33,11 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Core.Crypto.Sha256.Register<Sha256Impl>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
-            var path = @"%USERPROFILE%\TestData.Sha1.txt";
+            var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
+            if (!Core.Runtime.Platform.IsWindows)
+            {
+                path = @"%HOME%/TestData.Sha1.txt";
+            }
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
             Assert.Equal("ElwW3xccv1CczBJBzICd7wi1Sgc8PIoKo8DkweLMhWo=", sha256.GenerateInBase64(file));
         }
@@ -54,7 +58,11 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Core.Crypto.Sha256.Register<Sha256Impl>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
-            const string path = @"%USERPROFILE%\TestData.Sha1.txt";
+            var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
+            if (!Core.Runtime.Platform.IsWindows)
+            {
+                path = @"%HOME%/TestData.Sha1.txt";
+            }
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
             Assert.True(sha256.ValidateInBase64(file, "ElwW3xccv1CczBJBzICd7wi1Sgc8PIoKo8DkweLMhWo="));
         }
@@ -77,7 +85,11 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Core.Crypto.Sha256.Register<Sha256Impl>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
-            const string path = @"%USERPROFILE%\TestData.Sha1.txt";
+            var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
+            if (!Core.Runtime.Platform.IsWindows)
+            {
+                path = @"%HOME%/TestData.Sha1.txt";
+            }
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
             Assert.Equal("125c16df171cbf509ccc1241cc809def08b54a073c3c8a0aa3c0e4c1e2cc856a", sha256.GenerateInHex(file));
         }
@@ -98,7 +110,11 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Core.Crypto.Sha256.Register<Sha256Impl>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
-            const string path = @"%USERPROFILE%\TestData.Sha1.txt";
+            var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
+            if (!Core.Runtime.Platform.IsWindows)
+            {
+                path = @"%HOME%/TestData.Sha1.txt";
+            }
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
             Assert.True(sha256.ValidateInHex(file, "125c16df171cbf509ccc1241cc809def08b54a073c3c8a0aa3c0e4c1e2cc856a"));
         }
@@ -121,7 +137,11 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Core.Crypto.Sha256.Register<Sha256Impl>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
-            const string path = @"%USERPROFILE%\TestData.Sha1.txt";
+            var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
+            if (!Core.Runtime.Platform.IsWindows)
+            {
+                path = @"%HOME%/TestData.Sha1.txt";
+            }
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
             Assert.True(sha256.ValidateInAll(file, "ElwW3xccv1CczBJBzICd7wi1Sgc8PIoKo8DkweLMhWo="));
             Assert.True(sha256.ValidateInAll(file, "125c16df171cbf509ccc1241cc809def08b54a073c3c8a0aa3c0e4c1e2cc856a"));

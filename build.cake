@@ -9,6 +9,7 @@
 var configuration = Argument("configuration", "Debug");
 var revision = EnvironmentVariable("BUILD_NUMBER") ?? Argument("revision", "9999");
 var target = Argument("target", "Default");
+var buildWithUnitTesting = EnvironmentVariable("BUILD_WITH_UNITTESTING") ?? "ON";
 
 
 //////////////////////////////////////////////////////////////////////
@@ -42,6 +43,7 @@ var generatedDir = Directory("./source/generated");
 var packagesDir = Directory("./source/packages");
 var nugetDir = distDir + Directory(configuration) + Directory("nuget");
 var homeDir = Directory(EnvironmentVariable("USERPROFILE") ?? EnvironmentVariable("HOME"));
+var testDataDir = homeDir + Directory(".htc_test");
 var reportDotCoverDirAnyCPU = distDir + Directory(configuration) + Directory("report/dotCover/AnyCPU");
 var reportDotCoverDirX86 = distDir + Directory(configuration) + Directory("report/dotCover/x86");
 var reportOpenCoverDirAnyCPU = distDir + Directory(configuration) + Directory("report/OpenCover/AnyCPU");
@@ -148,20 +150,26 @@ Task("Build-Assemblies")
 });
 
 Task("Prepare-Unit-Test-Data")
+    .WithCriteria(() => "ON".Equals(buildWithUnitTesting))
     .IsDependentOn("Build-Assemblies")
     .Does(() =>
 {
-    if (!FileExists(homeDir + File("TestData.Md5.txt")))
+    if (!DirectoryExists(testDataDir))
     {
-        CopyFileToDirectory("source/" + product + ".Tests/TestData.Md5.txt", homeDir);
+        CreateDirectory(testDataDir);
     }
-    if (!FileExists(homeDir + File("TestData.Sha1.txt")))
+    if (!FileExists(testDataDir + File("TestData.Md5.txt")))
     {
-        CopyFileToDirectory("source/" + product + ".Tests/TestData.Sha1.txt", homeDir);
+        CopyFileToDirectory("source/" + product + ".Tests/TestData.Md5.txt", testDataDir);
+    }
+    if (!FileExists(testDataDir + File("TestData.Sha1.txt")))
+    {
+        CopyFileToDirectory("source/" + product + ".Tests/TestData.Sha1.txt", testDataDir);
     }
 });
 
 Task("Run-Unit-Tests-Under-AnyCPU")
+    .WithCriteria(() => "ON".Equals(buildWithUnitTesting))
     .IsDependentOn("Prepare-Unit-Test-Data")
     .Does(() =>
 {
@@ -219,7 +227,7 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                                 }
                         );
                 },
-                new FilePath(reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".xml"),
+                new FilePath(reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".OpenCover.xml"),
                 openCoverSettings
         );
     }
@@ -239,6 +247,7 @@ Task("Run-Unit-Tests-Under-AnyCPU")
 });
 
 Task("Run-Unit-Tests-Under-X86")
+    .WithCriteria(() => "ON".Equals(buildWithUnitTesting))
     .IsDependentOn("Run-Unit-Tests-Under-AnyCPU")
     .Does(() =>
 {
