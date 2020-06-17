@@ -10,6 +10,7 @@ var configuration = Argument("configuration", "Debug");
 var revision = EnvironmentVariable("BUILD_NUMBER") ?? Argument("revision", "9999");
 var target = Argument("target", "Default");
 var buildWithDupFinder = EnvironmentVariable("BUILD_WITH_DUPFINDER") ?? "ON";
+var buildWithInspectCode = EnvironmentVariable("BUILD_WITH_INSPECTCODE") ?? "ON";
 var buildWithUnitTesting = EnvironmentVariable("BUILD_WITH_UNITTESTING") ?? "ON";
 
 
@@ -324,6 +325,7 @@ Task("Run-DupFinder")
 });
 
 Task("Run-InspectCode")
+    .WithCriteria(() => "ON".Equals(buildWithInspectCode))
     .IsDependentOn("Run-DupFinder")
     .Does(() =>
 {
@@ -334,7 +336,9 @@ Task("Run-InspectCode")
                 new InspectCodeSettings()
                 {
                         SolutionWideAnalysis = true,
+                        SkipOutputAnalysis = true,
                         OutputFile = new FilePath(reportReSharperInspectCode.ToString() + "/" + product + ".xml"),
+                        Verbosity = InspectCodeVerbosity.Off,
                         ThrowExceptionOnFindingViolations = false
                 }
         );
