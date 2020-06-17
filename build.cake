@@ -9,6 +9,7 @@
 var configuration = Argument("configuration", "Debug");
 var revision = EnvironmentVariable("BUILD_NUMBER") ?? Argument("revision", "9999");
 var target = Argument("target", "Default");
+var buildWithDupFinder = EnvironmentVariable("BUILD_WITH_DUPFINDER") ?? "ON";
 var buildWithUnitTesting = EnvironmentVariable("BUILD_WITH_UNITTESTING") ?? "ON";
 
 
@@ -298,6 +299,7 @@ Task("Run-Unit-Tests-Under-X86")
 });
 
 Task("Run-DupFinder")
+    .WithCriteria(() => "ON".Equals(buildWithDupFinder))
     .IsDependentOn("Run-Unit-Tests-Under-X86")
     .Does(() =>
 {
@@ -309,6 +311,7 @@ Task("Run-DupFinder")
                 {
                         ShowStats = true,
                         ShowText = true,
+                        SkipOutputAnalysis = true,
                         OutputFile = new FilePath(reportReSharperDupFinder.ToString() + "/" + product + ".xml"),
                         ThrowExceptionOnFindingDuplicates = false
                 }
