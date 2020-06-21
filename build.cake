@@ -1,4 +1,5 @@
 #addin "nuget:?package=Cake.Coveralls&version=0.10.1"
+#addin "nuget:?package=Cake.Coverlet&version=2.4.2"
 #addin "nuget:?package=Cake.Git&version=0.21.0"
 #addin "nuget:?package=Cake.ReSharperReports&version=0.11.1"
 
@@ -132,10 +133,10 @@ Task("Generate-AssemblyInfo")
             {
                     Company = companyName,
                     Copyright = copyright,
-                    Product = string.Format("{0} : {1}", product, commitId),
-                    Version = version,
                     FileVersion = assemblyVersion,
-                    InformationalVersion = assemblyVersion
+                    InformationalVersion = assemblyVersion,
+                    Product = string.Format("{0} : {1}", product, commitId),
+                    Version = version
             }
     );
 });
@@ -170,26 +171,29 @@ Task("Prepare-Unit-Test-Data")
     }
 });
 
-Task("Run-Unit-Tests-Under-AnyCPU")
+Task("Run-Unit-Tests-Under-AnyCPU-1")
     .WithCriteria(() => "ON".Equals(buildWithUnitTesting))
     .IsDependentOn("Prepare-Unit-Test-Data")
     .Does(() =>
 {
     CreateDirectory(reportXUnitDirAnyCPU);
+    var testFilePattern = "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll";
+    var xUnit2Settings = new XUnit2Settings
+    {
+            HtmlReport = true,
+            NUnitReport = true,
+            OutputDirectory = reportXUnitDirAnyCPU,
+            Parallelism = ParallelismOption.None
+    };
+
     if(IsRunningOnWindows())
     {
         DotCoverAnalyse(
                 tool =>
                 {
                         tool.XUnit2(
-                                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll",
-                                new XUnit2Settings
-                                {
-                                        Parallelism = ParallelismOption.All,
-                                        HtmlReport = true,
-                                        NUnitReport = true,
-                                        OutputDirectory = reportXUnitDirAnyCPU
-                                }
+                                testFilePattern,
+                                xUnit2Settings
                         );
                 },
                 new FilePath(reportDotCoverDirAnyCPU.ToString() + "/" + product + ".html"),
@@ -203,72 +207,61 @@ Task("Run-Unit-Tests-Under-AnyCPU")
                 .WithFilter("-:*.Tests")
                 .WithFilter("-:*.XunitTest")
         );
-        CreateDirectory(reportOpenCoverDirAnyCPU);
-        var openCoverSettings = new OpenCoverSettings
-        {
-                MergeByHash = true,
-                NoDefaultFilters = true,
-                Register = "user",
-                SkipAutoProps = true
-        }.WithFilter("+[*]*")
-        .WithFilter("-[xunit.*]*")
-        .WithFilter("-[BouncyCastle.*]*")
-        .WithFilter("-[*.NunitTest]*")
-        .WithFilter("-[*.Tests]*")
-        .WithFilter("-[*.XunitTest]*");
-        OpenCover(
-                tool =>
-                {
-                        tool.XUnit2(
-                                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll",
-                                new XUnit2Settings
-                                {
-                                        Parallelism = ParallelismOption.All,
-                                        OutputDirectory = reportXUnitDirAnyCPU,
-                                        ShadowCopy = false
-                                }
-                        );
-                },
-                new FilePath(reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".OpenCover.xml"),
-                openCoverSettings
-        );
     }
     else
     {
         XUnit2(
-                "./temp/" + configuration + "/" + product + ".Tests/bin/AnyCPU/net452/*.Tests.dll",
-                new XUnit2Settings
-                {
-                        Parallelism = ParallelismOption.All,
-                        HtmlReport = true,
-                        NUnitReport = true,
-                        OutputDirectory = reportXUnitDirAnyCPU
-                }
+                testFilePattern,
+                xUnit2Settings
         );
     }
 });
 
+Task("Run-Unit-Tests-Under-AnyCPU-2")
+    .WithCriteria(() => "ON".Equals(buildWithUnitTesting))
+    .IsDependentOn("Run-Unit-Tests-Under-AnyCPU-1")
+    .Does(() =>
+{
+    CreateDirectory(reportOpenCoverDirAnyCPU);
+    DotNetCoreTest(
+            "./source/" + product + ".Tests/" + product + ".Tests.AnyCPU.csproj",
+            new DotNetCoreTestSettings
+            {
+            },
+            new CoverletSettings
+            {
+                    CollectCoverage = true,
+                    CoverletOutputDirectory = reportOpenCoverDirAnyCPU,
+                    CoverletOutputFormat = CoverletOutputFormat.opencover,
+                    CoverletOutputName = product + ".OpenCover.xml"
+            }
+    );
+});
+
 Task("Run-Unit-Tests-Under-X86")
     .WithCriteria(() => "ON".Equals(buildWithUnitTesting))
-    .IsDependentOn("Run-Unit-Tests-Under-AnyCPU")
+    .IsDependentOn("Run-Unit-Tests-Under-AnyCPU-2")
     .Does(() =>
 {
     CreateDirectory(reportXUnitDirX86);
+    var testFilePattern = "./temp/" + configuration + "/" + product + ".Tests/bin/x86/net452/*.Tests.dll";
+    var xUnit2Settings = new XUnit2Settings
+    {
+            HtmlReport = true,
+            NUnitReport = true,
+            OutputDirectory = reportXUnitDirX86,
+            Parallelism = ParallelismOption.None,
+            UseX86 = true
+    };
+
     if(IsRunningOnWindows())
     {
         DotCoverAnalyse(
                 tool =>
                 {
                         tool.XUnit2(
-                                "./temp/" + configuration + "/" + product + ".Tests/bin/x86/net452/*.Tests.dll",
-                                new XUnit2Settings
-                                {
-                                        Parallelism = ParallelismOption.All,
-                                        HtmlReport = true,
-                                        NUnitReport = true,
-                                        UseX86 = true,
-                                        OutputDirectory = reportXUnitDirX86
-                                }
+                                testFilePattern,
+                                xUnit2Settings
                         );
                 },
                 new FilePath(reportDotCoverDirX86.ToString() + "/" + product + ".html"),
@@ -286,15 +279,8 @@ Task("Run-Unit-Tests-Under-X86")
     else
     {
         XUnit2(
-                "./temp/" + configuration + "/" + product + ".Tests/bin/x86/net452/*.Tests.dll",
-                new XUnit2Settings
-                {
-                        Parallelism = ParallelismOption.All,
-                        HtmlReport = true,
-                        NUnitReport = true,
-                        UseX86 = true,
-                        OutputDirectory = reportXUnitDirX86
-                }
+                testFilePattern,
+                xUnit2Settings
         );
     }
 });
@@ -308,12 +294,12 @@ Task("Run-DupFinder")
     {
         DupFinder(
                 string.Format("./source/{0}.sln", product),
-                new DupFinderSettings()
+                new DupFinderSettings
                 {
+                        OutputFile = new FilePath(reportReSharperDupFinder.ToString() + "/" + product + ".xml"),
                         ShowStats = true,
                         ShowText = true,
                         SkipOutputAnalysis = true,
-                        OutputFile = new FilePath(reportReSharperDupFinder.ToString() + "/" + product + ".xml"),
                         ThrowExceptionOnFindingDuplicates = false
                 }
         );
@@ -333,13 +319,13 @@ Task("Run-InspectCode")
     {
         InspectCode(
                 string.Format("./source/{0}.sln", product),
-                new InspectCodeSettings()
+                new InspectCodeSettings
                 {
-                        SolutionWideAnalysis = true,
-                        SkipOutputAnalysis = true,
                         OutputFile = new FilePath(reportReSharperInspectCode.ToString() + "/" + product + ".xml"),
-                        Verbosity = InspectCodeVerbosity.Off,
-                        ThrowExceptionOnFindingViolations = false
+                        SkipOutputAnalysis = true,
+                        SolutionWideAnalysis = true,
+                        ThrowExceptionOnFindingViolations = false,
+                        Verbosity = InspectCodeVerbosity.Off
                 }
         );
         ReSharperReports(
@@ -361,6 +347,21 @@ Task("Sign-Assemblies")
 
     var signKey = "./temp/key.pfx";
     System.IO.File.WriteAllBytes(signKey, Convert.FromBase64String(signKeyEnc));
+    var signToolSignSettingsSha1 = new SignToolSignSettings
+    {
+            CertPath = signKey,
+            Password = signPass,
+            TimeStampUri = signSha1Uri
+    };
+    var signToolSignSettingsSha256 = new SignToolSignSettings
+    {
+            AppendSignature = true,
+            CertPath = signKey,
+            DigestAlgorithm = SignToolDigestAlgorithm.Sha256,
+            Password = signPass,
+            TimeStampDigestAlgorithm = SignToolDigestAlgorithm.Sha256,
+            TimeStampUri = signSha256Uri
+    };
 
     var file = string.Format("./temp/{0}/{1}/bin/net45/{1}.dll", configuration, product);
 
@@ -370,27 +371,14 @@ Task("Sign-Assemblies")
     }
     Sign(
             file,
-            new SignToolSignSettings
-            {
-                    TimeStampUri = signSha1Uri,
-                    CertPath = signKey,
-                    Password = signPass
-            }
+            signToolSignSettingsSha1
     );
     lastSignTimestamp = DateTime.Now;
 
     System.Threading.Thread.Sleep(signIntervalInMilli);
     Sign(
             file,
-            new SignToolSignSettings
-            {
-                    AppendSignature = true,
-                    TimeStampUri = signSha256Uri,
-                    DigestAlgorithm = SignToolDigestAlgorithm.Sha256,
-                    TimeStampDigestAlgorithm = SignToolDigestAlgorithm.Sha256,
-                    CertPath = signKey,
-                    Password = signPass
-            }
+            signToolSignSettingsSha256
     );
     lastSignTimestamp = DateTime.Now;
 
@@ -402,27 +390,14 @@ Task("Sign-Assemblies")
     }
     Sign(
             file,
-            new SignToolSignSettings
-            {
-                    TimeStampUri = signSha1Uri,
-                    CertPath = signKey,
-                    Password = signPass
-            }
+            signToolSignSettingsSha1
     );
     lastSignTimestamp = DateTime.Now;
 
     System.Threading.Thread.Sleep(signIntervalInMilli);
     Sign(
             file,
-            new SignToolSignSettings
-            {
-                    AppendSignature = true,
-                    TimeStampUri = signSha256Uri,
-                    DigestAlgorithm = SignToolDigestAlgorithm.Sha256,
-                    TimeStampDigestAlgorithm = SignToolDigestAlgorithm.Sha256,
-                    CertPath = signKey,
-                    Password = signPass
-            }
+            signToolSignSettingsSha256
     );
     lastSignTimestamp = DateTime.Now;
 });
@@ -440,13 +415,13 @@ Task("Build-NuGet-Package")
     Information("Pack version: {0}", nugetPackVersion);
     var settings = new DotNetCorePackSettings
     {
-            Configuration = configuration,
-            OutputDirectory = nugetDir,
-            NoBuild = true,
             ArgumentCustomization = (args) =>
             {
                     return args.Append("/p:Version={0}", nugetPackVersion);
-            }
+            },
+            Configuration = configuration,
+            NoBuild = true,
+            OutputDirectory = nugetDir
     };
 
     DotNetCorePack("./source/" + product + "/", settings);
@@ -458,8 +433,8 @@ Task("Update-Coverage-Report")
     .Does(() =>
 {
     CoverallsIo(
-            reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".xml",
-            new CoverallsIoSettings()
+            reportOpenCoverDirAnyCPU.ToString() + "/" + product + ".OpenCover.xml",
+            new CoverallsIoSettings
             {
                     RepoToken = coverallsApiKey
             }
@@ -482,8 +457,8 @@ Task("Publish-NuGet-Package")
             package,
             new NuGetPushSettings
             {
-                    Source = nugetSource,
-                    ApiKey = nugetApiKey
+                    ApiKey = nugetApiKey,
+                    Source = nugetSource
             }
     );
 });
