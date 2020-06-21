@@ -2,6 +2,7 @@
 #addin "nuget:?package=Cake.Coverlet&version=2.4.2"
 #addin "nuget:?package=Cake.Git&version=0.21.0"
 #addin "nuget:?package=Cake.ReSharperReports&version=0.11.1"
+#addin "nuget:?package=Cake.Sonar&version=1.1.25"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -68,6 +69,9 @@ var coverallsApiKey = EnvironmentVariable("COVERALLS_APIKEY") ?? "NOTSET";
 // Define nuget push source and key
 var nugetApiKey = EnvironmentVariable("NUGET_PUSH_TOKEN") ?? EnvironmentVariable("NUGET_APIKEY") ?? "NOTSET";
 var nugetSource = EnvironmentVariable("NUGET_PUSH_PATH") ?? EnvironmentVariable("NUGET_SOURCE") ?? "NOTSET";
+
+// Define sonarcloud key
+var sonarcloudApiKey = EnvironmentVariable("SONARCLOUD_APIKEY") ?? "NOTSET";
 
 
 //////////////////////////////////////////////////////////////////////
@@ -141,8 +145,24 @@ Task("Generate-AssemblyInfo")
     );
 });
 
-Task("Build-Assemblies")
+Task("Run-Sonar-Begin")
+    .WithCriteria(() => !"NOTSET".Equals(sonarcloudApiKey))
     .IsDependentOn("Generate-AssemblyInfo")
+    .Does(() =>
+{
+    SonarBegin(
+            new SonarBeginSettings {
+                    Key = "ViveportSoftware_vita_mod_desktop_csharp",
+                    Login = sonarcloudApiKey,
+                    OpenCoverReportsPath = "**/*.OpenCover.xml",
+                    Organization = "viveportsoftware",
+                    Url = "https://sonarcloud.io"
+            }
+    );
+});
+
+Task("Build-Assemblies")
+    .IsDependentOn("Run-Sonar-Begin")
     .Does(() =>
 {
     var settings = new DotNetCoreBuildSettings
@@ -285,9 +305,22 @@ Task("Run-Unit-Tests-Under-X86")
     }
 });
 
+Task("Run-Sonar-End")
+    .WithCriteria(() => !"NOTSET".Equals(sonarcloudApiKey))
+    .IsDependentOn("Run-Unit-Tests-Under-X86")
+    .Does(() =>
+{
+    SonarEnd(
+            new SonarEndSettings
+            {
+                    Login = sonarcloudApiKey
+            }
+    );
+});
+
 Task("Run-DupFinder")
     .WithCriteria(() => "ON".Equals(buildWithDupFinder))
-    .IsDependentOn("Run-Unit-Tests-Under-X86")
+    .IsDependentOn("Run-Sonar-End")
     .Does(() =>
 {
     if(IsRunningOnWindows())
