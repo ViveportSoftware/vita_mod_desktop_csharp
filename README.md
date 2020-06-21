@@ -32,6 +32,10 @@ Test-time dependencies:
 * [Portable.BouncyCastle](https://www.nuget.org/packages/Portable.BouncyCastle/)
 * [xUnit.net](https://xunit.github.io/)
 
+Build-time dependencies:
+
+* .NET Framework 4.6.1
+
 Build-time Prerequisite (Windows):
 
 * Microsoft Visual Studio 2017
