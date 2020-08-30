@@ -234,16 +234,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 bool defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (bool)_jArray[index];
+                return (bool)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse bool value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -251,16 +250,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 double defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (double)_jArray[index];
+                return (double)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse double value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -268,16 +266,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 float defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (float)_jArray[index];
+                return (float)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse float value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -285,16 +282,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 int defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (int)_jArray[index];
+                return (int)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse int value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -302,16 +298,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 long defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (long)_jArray[index];
+                return (long)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse long value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -319,16 +314,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 string defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (string)_jArray[index];
+                return (string)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse string value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
