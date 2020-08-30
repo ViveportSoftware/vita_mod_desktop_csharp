@@ -17,7 +17,29 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     {
         private const int BufferSizeInByte = 1024 * 128;
 
-        private static bool UsingBouncyCastleFirst { get; set; } = true;
+        private static bool _usingBouncyCastleFirst;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether using BouncyCastle first.
+        /// </summary>
+        /// <value><c>true</c> if using BouncyCastle first; otherwise, <c>false</c>.</value>
+        public static bool UsingBouncyCastleFirst
+        {
+            get
+            {
+                return _usingBouncyCastleFirst;
+            }
+            set
+            {
+                if (_usingBouncyCastleFirst == value)
+                {
+                    return;
+                }
+
+                _usingBouncyCastleFirst = value;
+                Logger.GetInstance(typeof(Sha256Impl)).Info($"Prefer using BouncyCastle first: {_usingBouncyCastleFirst}");
+            }
+        }
 
         private static string DoGenerateInBase64(
                 FileInfo file,
