@@ -56,16 +56,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 bool defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (bool)_jObject[key];
+                return (bool)_jObject[key];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not parse bool value by key: {key}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -73,16 +72,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 double defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (double)_jObject[key];
+                return (double)_jObject[key];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not parse double value by key: {key}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -90,16 +88,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 float defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (float)_jObject[key];
+                return (float)_jObject[key];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not parse float value by key: {key}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -107,16 +104,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 int defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (int)_jObject[key];
+                return (int)_jObject[key];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not parse int value by key: {key}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -124,16 +120,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 long defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (long)_jObject[key];
+                return (long)_jObject[key];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not parse long value by key: {key}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
@@ -141,16 +136,15 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 string defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (string)_jObject[key];
+                return (string)_jObject[key];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not parse string value by key: {key}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
