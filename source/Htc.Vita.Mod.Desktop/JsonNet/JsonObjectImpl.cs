@@ -52,7 +52,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override bool OnParseBool(string key, bool defaultValue)
+        protected override bool OnParseBool(
+                string key,
+                bool defaultValue)
         {
             var result = defaultValue;
             try
@@ -67,7 +69,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override double OnParseDouble(string key, double defaultValue)
+        protected override double OnParseDouble(
+                string key,
+                double defaultValue)
         {
             var result = defaultValue;
             try
@@ -82,7 +86,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override float OnParseFloat(string key, float defaultValue)
+        protected override float OnParseFloat(
+                string key,
+                float defaultValue)
         {
             var result = defaultValue;
             try
@@ -97,7 +103,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override int OnParseInt(string key, int defaultValue)
+        protected override int OnParseInt(
+                string key,
+                int defaultValue)
         {
             var result = defaultValue;
             try
@@ -112,7 +120,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override long OnParseLong(string key, long defaultValue)
+        protected override long OnParseLong(
+                string key,
+                long defaultValue)
         {
             var result = defaultValue;
             try
@@ -127,7 +137,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override string OnParseString(string key, string defaultValue)
+        protected override string OnParseString(
+                string key,
+                string defaultValue)
         {
             var result = defaultValue;
             try
@@ -170,7 +182,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutBool(string key, bool value)
+        protected override JsonObject OnPutBool(
+                string key,
+                bool value)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -180,7 +194,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutDouble(string key, double value)
+        protected override JsonObject OnPutDouble(
+                string key,
+                double value)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -190,7 +206,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutFloat(string key, float value)
+        protected override JsonObject OnPutFloat(
+                string key,
+                float value)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -200,7 +218,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutInt(string key, int value)
+        protected override JsonObject OnPutInt(
+                string key,
+                int value)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -210,7 +230,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutLong(string key, long value)
+        protected override JsonObject OnPutLong(
+                string key,
+                long value)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -220,7 +242,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutString(string key, string value)
+        protected override JsonObject OnPutString(
+                string key,
+                string value)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {
@@ -230,7 +254,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutJsonArray(string key, JsonArray value)
+        protected override JsonObject OnPutJsonArray(
+                string key,
+                JsonArray value)
         {
             if (string.IsNullOrWhiteSpace(key) || value == null)
             {
@@ -248,7 +274,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonObject OnPutJsonObject(string key, JsonObject value)
+        protected override JsonObject OnPutJsonObject(
+                string key,
+                JsonObject value)
         {
             if (string.IsNullOrWhiteSpace(key) || value == null)
             {
