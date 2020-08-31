@@ -17,9 +17,33 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     {
         private const int BufferSizeInByte = 1024 * 128;
 
-        private static bool UsingBouncyCastleFirst { get; set; } = true;
+        private static bool _usingBouncyCastleFirst;
 
-        private static string DoGenerateInBase64(FileInfo file, CancellationToken cancellationToken)
+        /// <summary>
+        /// Gets or sets a value indicating whether using BouncyCastle first.
+        /// </summary>
+        /// <value><c>true</c> if using BouncyCastle first; otherwise, <c>false</c>.</value>
+        public static bool UsingBouncyCastleFirst
+        {
+            get
+            {
+                return _usingBouncyCastleFirst;
+            }
+            set
+            {
+                if (_usingBouncyCastleFirst == value)
+                {
+                    return;
+                }
+
+                _usingBouncyCastleFirst = value;
+                Logger.GetInstance(typeof(Md5Impl)).Info($"Prefer using BouncyCastle first: {_usingBouncyCastleFirst}");
+            }
+        }
+
+        private static string DoGenerateInBase64(
+                FileInfo file,
+                CancellationToken cancellationToken)
         {
             return Core.Util.Convert.ToBase64String(GetDigestInByteArray(
                     file,
@@ -32,7 +56,9 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return Core.Util.Convert.ToBase64String(GetDigestInByteArray(content));
         }
 
-        private static string DoGenerateInHex(FileInfo file, CancellationToken cancellationToken)
+        private static string DoGenerateInHex(
+                FileInfo file,
+                CancellationToken cancellationToken)
         {
             return Core.Util.Convert.ToHexString(GetDigestInByteArray(
                     file,
@@ -45,7 +71,9 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             return Core.Util.Convert.ToHexString(GetDigestInByteArray(content));
         }
 
-        private static byte[] GetDigestInByteArray(FileInfo file, CancellationToken cancellationToken)
+        private static byte[] GetDigestInByteArray(
+                FileInfo file,
+                CancellationToken cancellationToken)
         {
             using (var readStream = file.OpenRead())
             {
@@ -53,12 +81,22 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                 var output = new byte[digest.GetDigestSize()];
                 var buffer = new byte[BufferSizeInByte];
                 int read;
-                while ((read = readStream.Read(buffer, 0, buffer.Length)) > 0)
+                while ((read = readStream.Read(
+                        buffer,
+                        0,
+                        buffer.Length)) > 0)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    digest.BlockUpdate(buffer, 0, read);
+                    digest.BlockUpdate(
+                            buffer,
+                            0,
+                            read
+                    );
                 }
-                digest.DoFinal(output, 0);
+                digest.DoFinal(
+                        output,
+                        0
+                );
                 return output;
             }
         }
@@ -68,22 +106,37 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
             var digest = new MD5Digest();
             var input = Encoding.UTF8.GetBytes(content);
             var output = new byte[digest.GetDigestSize()];
-            digest.BlockUpdate(input, 0, input.Length);
-            digest.DoFinal(output, 0);
+            digest.BlockUpdate(
+                    input,
+                    0,
+                    input.Length
+            );
+            digest.DoFinal(
+                    output,
+                    0
+            );
             return output;
         }
 
         /// <inheritdoc />
-        protected override string OnGenerateInBase64(FileInfo file, CancellationToken cancellationToken)
+        protected override string OnGenerateInBase64(
+                FileInfo file,
+                CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
             {
-                return DoGenerateInBase64(file, cancellationToken);
+                return DoGenerateInBase64(
+                        file,
+                        cancellationToken
+                );
             }
 
             try
             {
-                return DefaultMd5.DoGenerateInBase64(file, cancellationToken);
+                return DefaultMd5.DoGenerateInBase64(
+                        file,
+                        cancellationToken
+                );
             }
             catch (Exception e)
             {
@@ -95,7 +148,10 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                 Logger.GetInstance(typeof(Md5Impl)).Fatal($"Generating checksum by system error: {e}");
                 UsingBouncyCastleFirst = true;
             }
-            return DoGenerateInBase64(file, cancellationToken);
+            return DoGenerateInBase64(
+                    file,
+                    cancellationToken
+            );
         }
 
         /// <inheritdoc />
@@ -119,16 +175,24 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
         }
 
         /// <inheritdoc />
-        protected override string OnGenerateInHex(FileInfo file, CancellationToken cancellationToken)
+        protected override string OnGenerateInHex(
+                FileInfo file,
+                CancellationToken cancellationToken)
         {
             if (UsingBouncyCastleFirst)
             {
-                return DoGenerateInHex(file, cancellationToken);
+                return DoGenerateInHex(
+                        file,
+                        cancellationToken
+                );
             }
 
             try
             {
-                return DefaultMd5.DoGenerateInHex(file, cancellationToken);
+                return DefaultMd5.DoGenerateInHex(
+                        file,
+                        cancellationToken
+                );
             }
             catch (Exception e)
             {
@@ -140,7 +204,10 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
                 Logger.GetInstance(typeof(Md5Impl)).Fatal($"Generating checksum by system error: {e}");
                 UsingBouncyCastleFirst = true;
             }
-            return DoGenerateInHex(file, cancellationToken);
+            return DoGenerateInHex(
+                    file,
+                    cancellationToken
+            );
         }
 
         /// <inheritdoc />

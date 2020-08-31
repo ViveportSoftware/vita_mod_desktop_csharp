@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
 
@@ -40,6 +42,23 @@ namespace Htc.Vita.Mod.Desktop.Tests
             }
             var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
             Assert.Equal("pq/Xu7jVnluxLJ28xOws/w==", md5.GenerateInBase64(file));
+        }
+
+        [Fact(Skip = "Need large test data")]
+        public static void Default_1_GenerateInBase64_WithFile_withCancellationToken()
+        {
+            Core.Crypto.Md5.Register<Md5Impl>();
+            var md5 = Core.Crypto.Md5.GetInstance();
+            Assert.NotNull(md5);
+            const string path = @"%USERPROFILE%\Downloads\en_windows_10_consumer_editions_version_2004_x64_dvd_8d28c5d7.iso";
+            var file = new FileInfo(Environment.ExpandEnvironmentVariables(path));
+            var cancellationTokenSource = new CancellationTokenSource();
+            Task.Run(() =>
+            {
+                    cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(2));
+            });
+            var result = md5.GenerateInBase64Async(file, cancellationTokenSource.Token).Result;
+            Assert.True(string.IsNullOrWhiteSpace(result));
         }
 
         [Fact]

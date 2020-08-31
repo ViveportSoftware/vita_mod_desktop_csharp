@@ -112,49 +112,81 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertBool(int index, bool value)
+        protected override JsonArray OnInsertBool(
+                int index,
+                bool value)
         {
-            _jArray?.Insert(index, new JValue(value));
+            _jArray?.Insert(
+                    index,
+                    new JValue(value)
+            );
             return this;
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertDouble(int index, double value)
+        protected override JsonArray OnInsertDouble(
+                int index,
+                double value)
         {
-            _jArray?.Insert(index, new JValue(value));
+            _jArray?.Insert(
+                    index,
+                    new JValue(value)
+            );
             return this;
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertFloat(int index, float value)
+        protected override JsonArray OnInsertFloat(
+                int index,
+                float value)
         {
-            _jArray?.Insert(index, new JValue(value));
+            _jArray?.Insert(
+                    index,
+                    new JValue(value)
+            );
             return this;
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertInt(int index, int value)
+        protected override JsonArray OnInsertInt(
+                int index,
+                int value)
         {
-            _jArray?.Insert(index, new JValue(value));
+            _jArray?.Insert(
+                    index,
+                    new JValue(value)
+            );
             return this;
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertLong(int index, long value)
+        protected override JsonArray OnInsertLong(
+                int index,
+                long value)
         {
-            _jArray?.Insert(index, new JValue(value));
+            _jArray?.Insert(
+                    index,
+                    new JValue(value)
+            );
             return this;
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertString(int index, string value)
+        protected override JsonArray OnInsertString(
+                int index,
+                string value)
         {
-            _jArray?.Insert(index, new JValue(value));
+            _jArray?.Insert(
+                    index,
+                    new JValue(value)
+            );
             return this;
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertJsonArray(int index, JsonArray value)
+        protected override JsonArray OnInsertJsonArray(
+                int index,
+                JsonArray value)
         {
             if (value == null)
             {
@@ -162,7 +194,10 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             try
             {
-                _jArray?.Insert(index, ((JsonArrayImpl)value).GetInnerInstance());
+                _jArray?.Insert(
+                        index,
+                        ((JsonArrayImpl)value).GetInnerInstance()
+                );
             }
             catch (Exception)
             {
@@ -172,7 +207,9 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override JsonArray OnInsertJsonObject(int index, JsonObject value)
+        protected override JsonArray OnInsertJsonObject(
+                int index,
+                JsonObject value)
         {
             if (value == null)
             {
@@ -180,7 +217,10 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             try
             {
-                _jArray?.Insert(index, ((JsonObjectImpl)value).GetInnerInstance());
+                _jArray?.Insert(
+                        index,
+                        ((JsonObjectImpl)value).GetInnerInstance()
+                );
             }
             catch (Exception)
             {
@@ -190,93 +230,99 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         }
 
         /// <inheritdoc />
-        protected override bool OnParseBool(int index, bool defaultValue)
+        protected override bool OnParseBool(
+                int index,
+                bool defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (bool)_jArray[index];
+                return (bool)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse bool value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
-        protected override double OnParseDouble(int index, double defaultValue)
+        protected override double OnParseDouble(
+                int index,
+                double defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (double)_jArray[index];
+                return (double)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse double value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
-        protected override float OnParseFloat(int index, float defaultValue)
+        protected override float OnParseFloat(
+                int index,
+                float defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (float)_jArray[index];
+                return (float)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse float value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
-        protected override int OnParseInt(int index, int defaultValue)
+        protected override int OnParseInt(
+                int index,
+                int defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (int)_jArray[index];
+                return (int)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse int value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
-        protected override long OnParseLong(int index, long defaultValue)
+        protected override long OnParseLong(
+                int index,
+                long defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (long)_jArray[index];
+                return (long)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse long value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />
-        protected override string OnParseString(int index, string defaultValue)
+        protected override string OnParseString(
+                int index,
+                string defaultValue)
         {
-            var result = defaultValue;
             try
             {
-                result = (string)_jArray[index];
+                return (string)_jArray[index];
             }
             catch (Exception)
             {
                 Logger.GetInstance(typeof(JsonArrayImpl)).Error($"Can not parse string value by index: {index}");
+                return defaultValue;
             }
-            return result;
         }
 
         /// <inheritdoc />

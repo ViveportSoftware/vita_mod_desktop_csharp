@@ -37,7 +37,10 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
         }
 
         /// <inheritdoc />
-        protected override byte[] OnDecrypt(byte[] input, byte[] key, byte[] iv)
+        protected override byte[] OnDecrypt(
+                byte[] input,
+                byte[] key,
+                byte[] iv)
         {
             if (iv == null || iv.Length != IvSize128BitInByte)
             {
@@ -93,7 +96,10 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
         }
 
         /// <inheritdoc />
-        protected override byte[] OnEncrypt(byte[] input, byte[] key, byte[] iv)
+        protected override byte[] OnEncrypt(
+                byte[] input,
+                byte[] key,
+                byte[] iv)
         {
             if (iv == null || iv.Length != IvSize128BitInByte)
             {
