@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Htc.Vita.Core.Log;
 using log4net;

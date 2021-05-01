@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Htc.Vita.Core.Json;
 using Htc.Vita.Core.Log;
 using Newtonsoft.Json;

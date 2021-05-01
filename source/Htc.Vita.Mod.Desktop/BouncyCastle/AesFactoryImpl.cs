@@ -1,4 +1,4 @@
-﻿using Htc.Vita.Core.Crypto;
+using Htc.Vita.Core.Crypto;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
 {

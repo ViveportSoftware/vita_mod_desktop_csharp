@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Htc.Vita.Core.Crypto;
 using Htc.Vita.Core.Log;
 using Org.BouncyCastle.Crypto;

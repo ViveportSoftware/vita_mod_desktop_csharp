@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Htc.Vita.Core.Log;
 using log4net.Util;
 

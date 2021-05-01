@@ -1,4 +1,4 @@
-﻿using Htc.Vita.Core.Json;
+using Htc.Vita.Core.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

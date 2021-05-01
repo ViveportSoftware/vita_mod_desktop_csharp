@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
 using Xunit.Abstractions;
