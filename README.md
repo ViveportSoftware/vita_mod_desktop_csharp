@@ -18,6 +18,7 @@ Package-time dependencies: none
 Run-time dependencies:
 
 * .NET Framework 4.5
+* .NET Standard 2.0
 * [Htc.Vita.Core](https://www.nuget.org/packages/Htc.Vita.Core/)
 * [log4net](https://www.nuget.org/packages/log4net/)
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
