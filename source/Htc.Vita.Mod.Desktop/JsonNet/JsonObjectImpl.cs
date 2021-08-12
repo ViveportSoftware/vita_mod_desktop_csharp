@@ -38,17 +38,30 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         /// <inheritdoc />
         protected override ICollection<string> OnAllKeys()
         {
-            return _jObject.Properties().Select(p => p.Name).ToList();
+            return _jObject?.Properties().Select(p => p.Name).ToList();
         }
 
         /// <inheritdoc />
         protected override bool OnHasKey(string key)
         {
+            if (_jObject == null)
+            {
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(key))
             {
                 return false;
             }
-            return _jObject.Properties().Any(property => key.Equals(property.Name));
+
+            try
+            {
+                return _jObject.Properties().Any(property => key.Equals(property.Name));
+            }
+            catch (Exception)
+            {
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not check if the object has key: {key}");
+            }
+            return false;
         }
 
         /// <inheritdoc />
@@ -56,6 +69,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 bool defaultValue)
         {
+            if (_jObject == null)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (bool)_jObject[key];
@@ -72,6 +90,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 double defaultValue)
         {
+            if (_jObject == null)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (double)_jObject[key];
@@ -88,6 +111,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 float defaultValue)
         {
+            if (_jObject == null)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (float)_jObject[key];
@@ -104,6 +132,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 int defaultValue)
         {
+            if (_jObject == null)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (int)_jObject[key];
@@ -120,6 +153,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 long defaultValue)
         {
+            if (_jObject == null)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (long)_jObject[key];
@@ -136,6 +174,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 string defaultValue)
         {
+            if (_jObject == null)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (string)_jObject[key];
@@ -150,9 +193,18 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         /// <inheritdoc />
         protected override JsonArray OnParseJsonArray(string key)
         {
+            if (_jObject == null)
+            {
+                return null;
+            }
+
             try
             {
-                return new JsonArrayImpl((JArray)_jObject[key]);
+                var jArray = (JArray)_jObject[key];
+                if (jArray != null)
+                {
+                    return new JsonArrayImpl(jArray);
+                }
             }
             catch (Exception)
             {
@@ -164,9 +216,18 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         /// <inheritdoc />
         protected override JsonObject OnParseJsonObject(string key)
         {
+            if (_jObject == null)
+            {
+                return null;
+            }
+
             try
             {
-                return new JsonObjectImpl((JObject)_jObject[key]);
+                var jObject = (JObject)_jObject[key];
+                if (jObject != null)
+                {
+                    return new JsonObjectImpl(jObject);
+                }
             }
             catch (Exception)
             {
@@ -180,6 +241,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 bool value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 _jObject[key] = value;
@@ -192,6 +258,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 double value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 _jObject[key] = value;
@@ -204,6 +275,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 float value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 _jObject[key] = value;
@@ -216,6 +292,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 int value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 _jObject[key] = value;
@@ -228,6 +309,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 long value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 _jObject[key] = value;
@@ -240,6 +326,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 string value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (!string.IsNullOrWhiteSpace(key))
             {
                 _jObject[key] = value;
@@ -252,6 +343,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 JsonArray value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (string.IsNullOrWhiteSpace(key) || value == null)
             {
                 return this;
@@ -272,6 +368,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 string key,
                 JsonObject value)
         {
+            if (_jObject == null)
+            {
+                return this;
+            }
+
             if (string.IsNullOrWhiteSpace(key) || value == null)
             {
                 return this;
