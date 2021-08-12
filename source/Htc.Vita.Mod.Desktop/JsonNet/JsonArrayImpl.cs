@@ -234,6 +234,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 bool defaultValue)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (bool)_jArray[index];
@@ -250,6 +255,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 double defaultValue)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (double)_jArray[index];
@@ -266,6 +276,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 float defaultValue)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (float)_jArray[index];
@@ -282,6 +297,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 int defaultValue)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (int)_jArray[index];
@@ -298,6 +318,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 long defaultValue)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (long)_jArray[index];
@@ -314,6 +339,11 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
                 int index,
                 string defaultValue)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return defaultValue;
+            }
+
             try
             {
                 return (string)_jArray[index];
@@ -328,9 +358,18 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         /// <inheritdoc />
         protected override JsonArray OnParseJsonArray(int index)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return null;
+            }
+
             try
             {
-                return new JsonArrayImpl((JArray)_jArray[index]);
+                var jArray = (JArray)_jArray[index];
+                if (jArray != null)
+                {
+                    return new JsonArrayImpl(jArray);
+                }
             }
             catch (Exception)
             {
@@ -342,9 +381,18 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
         /// <inheritdoc />
         protected override JsonObject OnParseJsonObject(int index)
         {
+            if (_jArray == null || _jArray.Count <= index)
+            {
+                return null;
+            }
+
             try
             {
-                return new JsonObjectImpl((JObject)_jArray[index]);
+                var jObject = (JObject)_jArray[index];
+                if (jObject != null)
+                {
+                    return new JsonObjectImpl(jObject);
+                }
             }
             catch (Exception)
             {
