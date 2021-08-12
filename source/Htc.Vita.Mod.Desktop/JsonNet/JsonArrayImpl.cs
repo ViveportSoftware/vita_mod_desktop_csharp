@@ -365,11 +365,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
 
             try
             {
-                var jArray = (JArray)_jArray[index];
-                if (jArray != null)
-                {
-                    return new JsonArrayImpl(jArray);
-                }
+                return new JsonArrayImpl((JArray)_jArray[index]);
             }
             catch (Exception)
             {
@@ -388,11 +384,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
 
             try
             {
-                var jObject = (JObject)_jArray[index];
-                if (jObject != null)
-                {
-                    return new JsonObjectImpl(jObject);
-                }
+                return new JsonObjectImpl((JObject)_jArray[index]);
             }
             catch (Exception)
             {

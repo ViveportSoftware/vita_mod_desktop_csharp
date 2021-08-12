@@ -59,7 +59,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             }
             catch (Exception)
             {
-                Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not check if the object has key: {key}. object: {_jObject.ToString(Formatting.None)}");
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not check if the object has key: {key}");
             }
             return false;
         }

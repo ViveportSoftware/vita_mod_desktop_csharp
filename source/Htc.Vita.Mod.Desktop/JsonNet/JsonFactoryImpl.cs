@@ -36,12 +36,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             {
                 return null;
             }
-            var jArray = JArray.Parse(content);
-            if (jArray == null)
-            {
-                return null;
-            }
-            return new JsonArrayImpl(jArray);
+            return new JsonArrayImpl(JArray.Parse(content));
         }
 
         /// <inheritdoc />
@@ -51,12 +46,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             {
                 return null;
             }
-            var jObject = JObject.Parse(content);
-            if (jObject == null)
-            {
-                return null;
-            }
-            return new JsonObjectImpl(jObject);
+            return new JsonObjectImpl(JObject.Parse(content));
         }
 
         /// <inheritdoc />
