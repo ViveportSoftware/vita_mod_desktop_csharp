@@ -48,7 +48,16 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
             {
                 return false;
             }
-            return _jObject.Properties().Any(property => key.Equals(property.Name));
+
+            try
+            {
+                return _jObject.Properties().Any(property => key.Equals(property.Name));
+            }
+            catch (Exception)
+            {
+                Logger.GetInstance(typeof(JsonObjectImpl)).Error($"Can not check if the object has key: {key}. object: {_jObject?.ToString(Formatting.None) ?? ""}");
+            }
+            return false;
         }
 
         /// <inheritdoc />
