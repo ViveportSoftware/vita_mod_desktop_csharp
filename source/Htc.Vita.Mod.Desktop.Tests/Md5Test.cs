@@ -2,17 +2,16 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public static class Md5
+    public static class Md5Test
     {
         [Fact]
         public static void Default_0_GetInstance()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
         }
@@ -20,7 +19,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_1_GenerateInBase64_WithContent()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var value = md5.GenerateInBase64("");
@@ -32,7 +31,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_1_GenerateInBase64_WithFile()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var path = @"%USERPROFILE%\.htc_test\TestData.Md5.txt";
@@ -47,7 +46,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact(Skip = "Need large test data")]
         public static void Default_1_GenerateInBase64_WithFile_withCancellationToken()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             const string path = @"%USERPROFILE%\Downloads\en_windows_10_consumer_editions_version_2004_x64_dvd_8d28c5d7.iso";
@@ -64,7 +63,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_2_ValidateInBase64_WithContent()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             Assert.True(md5.ValidateInBase64("", "1B2M2Y8AsgTpgAmY7PhCfg=="));
@@ -74,7 +73,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_2_ValidateInBase64_WithFile()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var path = @"%USERPROFILE%\.htc_test\TestData.Md5.txt";
@@ -89,7 +88,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_GenerateInHex_WithContent()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var value = md5.GenerateInHex("");
@@ -101,7 +100,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_GenerateInHex_WithFile()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var path = @"%USERPROFILE%\.htc_test\TestData.Md5.txt";
@@ -116,7 +115,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_4_ValidateInHex_WithContent()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             Assert.True(md5.ValidateInHex("", "d41d8cd98f00b204e9800998ecf8427e"));
@@ -126,7 +125,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_4_ValidateInHex_WithFile()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var path = @"%USERPROFILE%\.htc_test\TestData.Md5.txt";
@@ -141,7 +140,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_5_ValidateInAll_WithContent()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             Assert.True(md5.ValidateInAll("", "1B2M2Y8AsgTpgAmY7PhCfg=="));
@@ -153,7 +152,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_5_ValidateInAll_WithFile()
         {
-            Core.Crypto.Md5.Register<Md5Impl>();
+            Core.Crypto.Md5.Register<Crypto.BouncyCastle.Md5>();
             var md5 = Core.Crypto.Md5.GetInstance();
             Assert.NotNull(md5);
             var path = @"%USERPROFILE%\.htc_test\TestData.Md5.txt";
