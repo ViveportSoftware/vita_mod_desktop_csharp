@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Htc.Vita.Core.Tests")]
+[assembly: AssemblyTitle("Htc.Vita.Mod.Desktop.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 
@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2E6FBBF3-AC57-452B-B1FE-DE383D7EE43D")]
+[assembly: Guid("db59fe78-bc42-4c54-b4c8-d26087f21116")]
