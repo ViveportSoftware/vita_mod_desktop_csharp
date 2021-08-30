@@ -7,6 +7,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
 {
     public class AesFactory
     {
+#pragma warning disable CS0618
         private readonly ITestOutputHelper _output;
 
         public AesFactory(ITestOutputHelper output)
@@ -83,5 +84,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var decrypted = Encoding.UTF8.GetString(decryptedInBytes);
             Assert.Equal(plain, decrypted);
         }
+#pragma warning restore CS0618
     }
 }

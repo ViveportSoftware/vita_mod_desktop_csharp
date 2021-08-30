@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Htc.Vita.Core.Log;
 using log4net.Util;
@@ -9,6 +10,7 @@ namespace Htc.Vita.Mod.Desktop.Log4Net
     /// Implements the <see cref="TraceListener" />
     /// </summary>
     /// <seealso cref="TraceListener" />
+    [Obsolete("This class is obsoleted. Use Log4Net.TraceListener instead.")]
     public class TraceListenerImpl : TraceListener
     {
         /// <summary>

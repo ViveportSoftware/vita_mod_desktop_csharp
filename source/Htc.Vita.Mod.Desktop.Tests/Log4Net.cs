@@ -8,6 +8,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
 {
     public static class Log4Net
     {
+#pragma warning disable CS0618
         [Fact]
         public static void Default_0_GetInstance()
         {
@@ -300,5 +301,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var logger = Logger.GetInstance();
             logger.Shutdown();
         }
+#pragma warning restore CS0618
     }
 }

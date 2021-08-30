@@ -11,6 +11,7 @@ namespace Htc.Vita.Mod.Desktop.Log4Net
     /// Implements the <see cref="Logger" />
     /// </summary>
     /// <seealso cref="Logger" />
+    [Obsolete("This class is obsoleted. Use Log4Net.Logger instead.")]
     public class LoggerImpl : Logger
     {
         private readonly ILog _log;

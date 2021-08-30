@@ -14,6 +14,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     /// Implements the <see cref="Aes" />
     /// </summary>
     /// <seealso cref="Aes" />
+    [Obsolete("This class is obsoleted. Use BouncyCastle.Aes instead.")]
     public class AesImpl : Aes
     {
         private static IBlockCipher ConvertToImpl(CipherMode cipherMode)

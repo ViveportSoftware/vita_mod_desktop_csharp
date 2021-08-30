@@ -9,6 +9,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
 {
     public static class Md5
     {
+#pragma warning disable CS0618
         [Fact]
         public static void Default_0_GetInstance()
         {
@@ -165,5 +166,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.True(md5.ValidateInAll(file, "pq/Xu7jVnluxLJ28xOws/w=="));
             Assert.True(md5.ValidateInAll(file, "a6afd7bbb8d59e5bb12c9dbcc4ec2cff"));
         }
+#pragma warning restore CS0618
     }
 }

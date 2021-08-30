@@ -7,6 +7,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
 {
     public static class Sha256
     {
+#pragma warning disable CS0618
         [Fact]
         public static void Default_0_GetInstance()
         {
@@ -146,5 +147,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.True(sha256.ValidateInAll(file, "ElwW3xccv1CczBJBzICd7wi1Sgc8PIoKo8DkweLMhWo="));
             Assert.True(sha256.ValidateInAll(file, "125c16df171cbf509ccc1241cc809def08b54a073c3c8a0aa3c0e4c1e2cc856a"));
         }
+#pragma warning restore CS0618
     }
 }

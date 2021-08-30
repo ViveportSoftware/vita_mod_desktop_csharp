@@ -1,3 +1,4 @@
+using System;
 using Htc.Vita.Core.Crypto;
 
 namespace Htc.Vita.Mod.Desktop.BouncyCastle
@@ -7,6 +8,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     /// Implements the <see cref="AesFactory" />
     /// </summary>
     /// <seealso cref="AesFactory" />
+    [Obsolete("This class is obsoleted. Use BouncyCastle.AesFactory instead.")]
     public class AesFactoryImpl : AesFactory
     {
         /// <inheritdoc />

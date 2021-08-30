@@ -9,6 +9,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
 {
     public class JsonNet
     {
+#pragma warning disable CS0618
         private readonly ITestOutputHelper _output;
 
         public JsonNet(ITestOutputHelper output)
@@ -810,5 +811,6 @@ namespace Htc.Vita.Mod.Desktop.Tests
             public int TestInt1 { get; set; }
             public string TestString1 { get; set; }
         }
+#pragma warning restore CS0618
     }
 }

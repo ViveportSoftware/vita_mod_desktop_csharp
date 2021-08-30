@@ -13,6 +13,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
     /// Implements the <see cref="JsonObject" />
     /// </summary>
     /// <seealso cref="JsonObject" />
+    [Obsolete("This class is obsoleted. Use JsonNet.JsonObject instead.")]
     public class JsonObjectImpl : JsonObject
     {
         private readonly JObject _jObject;
