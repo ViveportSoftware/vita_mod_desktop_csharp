@@ -1,18 +1,16 @@
 using System.Collections.Generic;
 using Htc.Vita.Core.Json;
 using Htc.Vita.Core.Log;
-using Htc.Vita.Mod.Desktop.JsonNet;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public class JsonNet
+    public class JsonNetTest
     {
-#pragma warning disable CS0618
         private readonly ITestOutputHelper _output;
 
-        public JsonNet(ITestOutputHelper output)
+        public JsonNetTest(ITestOutputHelper output)
         {
             _output = output;
         }
@@ -20,7 +18,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_0_GetInstance()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
         }
@@ -28,7 +26,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_1_CreateJsonArray()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -39,7 +37,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_2_CreateJsonObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -50,7 +48,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "{\"TestBool1\":true,\"TestInt1\":3,\"TestString1\":\"test\"}";
@@ -64,7 +62,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject_WithBoolAndInt()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "{\"TestBool1\":true,\"TestInt1\":3}";
@@ -78,7 +76,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject_WithEmpty()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "{}";
@@ -92,7 +90,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject_WithNull()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "";
@@ -105,7 +103,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject_AsList()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "[{\"TestBool1\":true,\"TestInt1\":3,\"TestString1\":\"test\"},{\"TestBool1\":false,\"TestInt1\":5,\"TestString1\":null}]";
@@ -127,7 +125,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject_AsDictionary()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "{\"testKey0\":\"testValue0\",\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\"}";
@@ -141,7 +139,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_DeserializeObject_AsListOfDictionary()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var content = "[{\"testKey0\":\"testValue0\",\"testKey1\":\"testValue1\",\"testKey2\":\"testValue2\"},{\"testKey0\":\"testValue3\",\"testKey2\":\"testValue4\",\"testKey4\":\"testValue5\"}]";
@@ -163,7 +161,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_4_GetJsonArray()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.GetJsonArray("[]");
@@ -174,7 +172,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_5_GetJsonObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.GetJsonObject("{}");
@@ -185,7 +183,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_6_SerializeObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var class1 = new TestClass1
@@ -202,7 +200,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_6_SerializeObject_WithList()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var classList = new List<TestClass1>();
@@ -269,7 +267,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_00_InsertBool()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -283,7 +281,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_01_InsertDouble()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -297,7 +295,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_02_InsertFloat()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -311,7 +309,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_03_InsertInt()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -325,7 +323,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_04_InsertLong()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -339,7 +337,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_05_InsertString()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -353,7 +351,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_06_InsertJsonArray()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -369,7 +367,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_07_InsertJsonObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -385,7 +383,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_08_ParseBool()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -402,7 +400,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_09_ParseDouble()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -419,7 +417,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_10_ParseFloat()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -436,7 +434,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_11_ParseInt()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -453,7 +451,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_12_ParseLong()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -470,7 +468,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_13_ParseString()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -484,7 +482,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_14_ParseJsonArray()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -500,7 +498,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_15_ParseJsonObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -516,7 +514,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonArray_16_Size()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonArray = jsonFactory.CreateJsonArray();
@@ -531,7 +529,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_00_PutBool()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -545,7 +543,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_01_PutDouble()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -559,7 +557,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_02_PutFloat()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -573,7 +571,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_03_PutInt()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -587,7 +585,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_04_PutLong()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -601,7 +599,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_05_PutString()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -615,7 +613,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_06_PutJsonArray()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -631,7 +629,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_07_PutJsonObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -647,7 +645,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_08_ParseBool()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -664,7 +662,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_09_ParseDouble()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -681,7 +679,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_10_ParseFloat()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -698,7 +696,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_11_ParseInt()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -715,7 +713,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_12_ParseLong()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -732,7 +730,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_13_ParseString()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -746,7 +744,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_14_ParseJsonArray()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -762,7 +760,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_15_ParseJsonObject()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -778,7 +776,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_16_HasKey()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -793,7 +791,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void JsonObject_17_AllKeys()
         {
-            JsonFactory.Register<JsonFactoryImpl>();
+            JsonFactory.Register<Json.JsonNet.JsonFactory>();
             var jsonFactory = JsonFactory.GetInstance();
             Assert.NotNull(jsonFactory);
             var jsonObject = jsonFactory.CreateJsonObject();
@@ -811,6 +809,5 @@ namespace Htc.Vita.Mod.Desktop.Tests
             public int TestInt1 { get; set; }
             public string TestString1 { get; set; }
         }
-#pragma warning restore CS0618
     }
 }

@@ -11,6 +11,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
     /// Implements the <see cref="JsonArray" />
     /// </summary>
     /// <seealso cref="JsonArray" />
+    [Obsolete("This class is obsoleted. Use JsonNet.JsonArray instead.")]
     public class JsonArrayImpl : JsonArray
     {
         private readonly JArray _jArray;

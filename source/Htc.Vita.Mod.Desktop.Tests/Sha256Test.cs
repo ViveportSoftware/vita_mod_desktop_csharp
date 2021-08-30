@@ -1,17 +1,15 @@
 using System;
 using System.IO;
-using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public static class Sha256
+    public static class Sha256Test
     {
-#pragma warning disable CS0618
         [Fact]
         public static void Default_0_GetInstance()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
         }
@@ -19,7 +17,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_1_GenerateInBase64_WithContent()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var value = sha256.GenerateInBase64("");
@@ -31,7 +29,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_1_GenerateInBase64_WithFile()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
@@ -46,7 +44,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_2_ValidateInBase64_WithContent()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             Assert.True(sha256.ValidateInBase64("", "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="));
@@ -56,7 +54,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_2_ValidateInBase64_WithFile()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
@@ -71,7 +69,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_GenerateInHex_WithContent()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var value = sha256.GenerateInHex("");
@@ -83,7 +81,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_3_GenerateInHex_WithFile()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
@@ -98,7 +96,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_4_ValidateInHex_WithContent()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             Assert.True(sha256.ValidateInHex("", "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"));
@@ -108,7 +106,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_4_ValidateInHex_WithFile()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
@@ -123,7 +121,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_5_ValidateInAll_WithContent()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             Assert.True(sha256.ValidateInAll("", "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU="));
@@ -135,7 +133,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_5_ValidateInAll_WithFile()
         {
-            Core.Crypto.Sha256.Register<Sha256Impl>();
+            Core.Crypto.Sha256.Register<Crypto.BouncyCastle.Sha256>();
             var sha256 = Core.Crypto.Sha256.GetInstance();
             Assert.NotNull(sha256);
             var path = @"%USERPROFILE%\.htc_test\TestData.Sha1.txt";
@@ -147,6 +145,5 @@ namespace Htc.Vita.Mod.Desktop.Tests
             Assert.True(sha256.ValidateInAll(file, "ElwW3xccv1CczBJBzICd7wi1Sgc8PIoKo8DkweLMhWo="));
             Assert.True(sha256.ValidateInAll(file, "125c16df171cbf509ccc1241cc809def08b54a073c3c8a0aa3c0e4c1e2cc856a"));
         }
-#pragma warning restore CS0618
     }
 }

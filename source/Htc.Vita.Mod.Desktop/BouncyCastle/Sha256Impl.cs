@@ -13,6 +13,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     /// Implements the <see cref="Sha256" />
     /// </summary>
     /// <seealso cref="Sha256" />
+    [Obsolete("This class is obsoleted. Use BouncyCastle.Sha256 instead.")]
     public partial class Sha256Impl : Sha256
     {
         private const int BufferSizeInByte = 1024 * 128;

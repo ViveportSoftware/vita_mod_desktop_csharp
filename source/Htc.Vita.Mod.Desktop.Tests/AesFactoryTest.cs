@@ -1,16 +1,14 @@
 using System.Text;
-using Htc.Vita.Mod.Desktop.BouncyCastle;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Htc.Vita.Mod.Desktop.Tests
 {
-    public class AesFactory
+    public class AesFactoryTest
     {
-#pragma warning disable CS0618
         private readonly ITestOutputHelper _output;
 
-        public AesFactory(ITestOutputHelper output)
+        public AesFactoryTest(ITestOutputHelper output)
         {
             _output = output;
         }
@@ -18,7 +16,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_0_GetInstance()
         {
-            Core.Crypto.AesFactory.Register<AesFactoryImpl>();
+            Core.Crypto.AesFactory.Register<Crypto.BouncyCastle.AesFactory>();
             var aesFactory = Core.Crypto.AesFactory.GetInstance();
             Assert.NotNull(aesFactory);
         }
@@ -26,7 +24,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Default_1_Get()
         {
-            Core.Crypto.AesFactory.Register<AesFactoryImpl>();
+            Core.Crypto.AesFactory.Register<Crypto.BouncyCastle.AesFactory>();
             var aesFactory = Core.Crypto.AesFactory.GetInstance();
             Assert.NotNull(aesFactory);
             var aes = aesFactory.Get();
@@ -36,7 +34,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Aes_0_Encrypt_WithInput_WithPassword()
         {
-            Core.Crypto.AesFactory.Register<AesFactoryImpl>();
+            Core.Crypto.AesFactory.Register<Crypto.BouncyCastle.AesFactory>();
             var aesFactory = Core.Crypto.AesFactory.GetInstance();
             Assert.NotNull(aesFactory);
             var aes = aesFactory.Get();
@@ -51,7 +49,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public void Aes_0_Encrypt_WithEmptyInput_WithPassword()
         {
-            Core.Crypto.AesFactory.Register<AesFactoryImpl>();
+            Core.Crypto.AesFactory.Register<Crypto.BouncyCastle.AesFactory>();
             var aesFactory = Core.Crypto.AesFactory.GetInstance();
             Assert.NotNull(aesFactory);
             var aes = aesFactory.Get();
@@ -68,7 +66,7 @@ namespace Htc.Vita.Mod.Desktop.Tests
         [Fact]
         public static void Aes_1_Decrypt_WithPassword()
         {
-            Core.Crypto.AesFactory.Register<AesFactoryImpl>();
+            Core.Crypto.AesFactory.Register<Crypto.BouncyCastle.AesFactory>();
             var aesFactory = Core.Crypto.AesFactory.GetInstance();
             Assert.NotNull(aesFactory);
             var aesEncryptor = aesFactory.Get();
@@ -84,6 +82,5 @@ namespace Htc.Vita.Mod.Desktop.Tests
             var decrypted = Encoding.UTF8.GetString(decryptedInBytes);
             Assert.Equal(plain, decrypted);
         }
-#pragma warning restore CS0618
     }
 }

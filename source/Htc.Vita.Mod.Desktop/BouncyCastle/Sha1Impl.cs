@@ -13,6 +13,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     /// Implements the <see cref="Sha1" />
     /// </summary>
     /// <seealso cref="Sha1" />
+    [Obsolete("This class is obsoleted. Use BouncyCastle.Sha1 instead.")]
     public partial class Sha1Impl : Sha1
     {
         private const int BufferSizeInByte = 1024 * 128;

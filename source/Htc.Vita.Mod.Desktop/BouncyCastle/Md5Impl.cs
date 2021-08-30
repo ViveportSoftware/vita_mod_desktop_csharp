@@ -13,6 +13,7 @@ namespace Htc.Vita.Mod.Desktop.BouncyCastle
     /// Implements the <see cref="Md5" />
     /// </summary>
     /// <seealso cref="Md5" />
+    [Obsolete("This class is obsoleted. Use BouncyCastle.Md5 instead.")]
     public partial class Md5Impl : Md5
     {
         private const int BufferSizeInByte = 1024 * 128;

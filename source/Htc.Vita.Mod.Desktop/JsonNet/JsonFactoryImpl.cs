@@ -1,3 +1,4 @@
+using System;
 using Htc.Vita.Core.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -9,6 +10,7 @@ namespace Htc.Vita.Mod.Desktop.JsonNet
     /// Implements the <see cref="JsonFactory" />
     /// </summary>
     /// <seealso cref="JsonFactory" />
+    [Obsolete("This class is obsoleted. Use JsonNet.JsonFactory instead.")]
     public class JsonFactoryImpl : JsonFactory
     {
         /// <inheritdoc />
