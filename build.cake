@@ -27,6 +27,11 @@ var version = "0.10.3";
 var semanticVersion = $"{version}.{revision}";
 var ciVersion = $"{version}.0";
 var buildVersion = "Release".Equals(configuration) ? semanticVersion : $"{ciVersion}-CI{revision}";
+var targetProducts = new[]
+{
+        product,
+        $"{product}.BouncyCastle"
+};
 
 // Define copyright
 var copyright = $"Copyright © 2017 - {DateTime.Now.Year}";
@@ -335,38 +340,41 @@ Task("Sign-Assemblies")
     };
     foreach (var targetPlatform in targetPlatforms)
     {
-        var file = $"./temp/{configuration}/{product}/bin/{targetPlatform}/{product}.dll";
-
-        var totalTimeInMilli = (DateTime.Now - lastSignTimestamp).TotalMilliseconds;
-        if (totalTimeInMilli < signIntervalInMilli)
+        foreach (var targetProduct in targetProducts)
         {
-            System.Threading.Thread.Sleep(signIntervalInMilli - (int)totalTimeInMilli);
-        }
-        Sign(
-                file,
-                new SignToolSignSettings
-                {
-                        CertPath = signKey,
-                        Password = signPass,
-                        TimeStampUri = signSha1Uri
-                }
-        );
-        lastSignTimestamp = DateTime.Now;
+            var file = $"./temp/{configuration}/{targetProduct}/bin/{targetPlatform}/{targetProduct}.dll";
 
-        System.Threading.Thread.Sleep(signIntervalInMilli);
-        Sign(
-                file,
-                new SignToolSignSettings
-                {
-                        AppendSignature = true,
-                        CertPath = signKey,
-                        DigestAlgorithm = SignToolDigestAlgorithm.Sha256,
-                        Password = signPass,
-                        TimeStampDigestAlgorithm = SignToolDigestAlgorithm.Sha256,
-                        TimeStampUri = signSha256Uri
-                }
-        );
-        lastSignTimestamp = DateTime.Now;
+            var totalTimeInMilli = (DateTime.Now - lastSignTimestamp).TotalMilliseconds;
+            if (totalTimeInMilli < signIntervalInMilli)
+            {
+                System.Threading.Thread.Sleep(signIntervalInMilli - (int)totalTimeInMilli);
+            }
+            Sign(
+                    file,
+                    new SignToolSignSettings
+                    {
+                            CertPath = signKey,
+                            Password = signPass,
+                            TimeStampUri = signSha1Uri
+                    }
+            );
+            lastSignTimestamp = DateTime.Now;
+
+            System.Threading.Thread.Sleep(signIntervalInMilli);
+            Sign(
+                    file,
+                    new SignToolSignSettings
+                    {
+                            AppendSignature = true,
+                            CertPath = signKey,
+                            DigestAlgorithm = SignToolDigestAlgorithm.Sha256,
+                            Password = signPass,
+                            TimeStampDigestAlgorithm = SignToolDigestAlgorithm.Sha256,
+                            TimeStampUri = signSha256Uri
+                    }
+            );
+            lastSignTimestamp = DateTime.Now;
+        }
     }
 });
 
@@ -375,19 +383,22 @@ Task("Build-NuGet-Package")
     .Does(() =>
 {
     CreateDirectory(nugetDir);
-    DotNetCorePack(
-            $"./source/{product}/",
-            new DotNetCorePackSettings
-            {
-                    ArgumentCustomization = (args) =>
-                    {
-                            return args.Append($"/p:Version={buildVersion}");
-                    },
-                    Configuration = configuration,
-                    NoBuild = true,
-                    OutputDirectory = nugetDir
-            }
-    );
+    foreach (var targetProduct in targetProducts)
+    {
+        DotNetCorePack(
+                $"./source/{targetProduct}/",
+                new DotNetCorePackSettings
+                {
+                        ArgumentCustomization = (args) =>
+                        {
+                                return args.Append($"/p:Version={buildVersion}");
+                        },
+                        Configuration = configuration,
+                        NoBuild = true,
+                        OutputDirectory = nugetDir
+                }
+        );
+    }
 });
 
 Task("Update-Coverage-Report")
@@ -409,14 +420,17 @@ Task("Publish-NuGet-Package")
     .IsDependentOn("Update-Coverage-Report")
     .Does(() =>
 {
-    NuGetPush(
-            new FilePath($"./dist/{configuration}/nuget/{product}.{buildVersion}.nupkg"),
-            new NuGetPushSettings
-            {
-                    ApiKey = nugetApiKey,
-                    Source = nugetSource
-            }
-    );
+    foreach (var targetProduct in targetProducts)
+    {
+        NuGetPush(
+                new FilePath($"./dist/{configuration}/nuget/{targetProduct}.{buildVersion}.nupkg"),
+                new NuGetPushSettings
+                {
+                        ApiKey = nugetApiKey,
+                        Source = nugetSource
+                }
+        );
+    }
 });
 
 

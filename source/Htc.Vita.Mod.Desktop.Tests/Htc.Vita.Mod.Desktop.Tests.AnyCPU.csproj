@@ -21,6 +21,7 @@
     <Compile Include="..\generated\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Htc.Vita.Mod.Desktop.BouncyCastle\Htc.Vita.Mod.Desktop.BouncyCastle.csproj" />
     <ProjectReference Include="..\Htc.Vita.Mod.Desktop\Htc.Vita.Mod.Desktop.csproj" />
   </ItemGroup>
   <ItemGroup>
