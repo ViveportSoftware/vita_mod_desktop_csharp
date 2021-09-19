@@ -2,17 +2,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop", "Htc.Vita.Mod.Desktop\Htc.Vita.Mod.Desktop.csproj", "{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.Tests.AnyCPU", "Htc.Vita.Mod.Desktop.Tests\Htc.Vita.Mod.Desktop.Tests.AnyCPU.csproj", "{7A85131A-4A9E-4F0B-8BFB-47B3F87DB8AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.Tests.x86", "Htc.Vita.Mod.Desktop.Tests\Htc.Vita.Mod.Desktop.Tests.x86.csproj", "{0567BAF0-1BCA-40FC-8B90-12391CC4BEB7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.BouncyCastle", "Htc.Vita.Mod.Desktop.BouncyCastle\Htc.Vita.Mod.Desktop.BouncyCastle.csproj", "{29F8098E-E3A7-42BC-B9BF-C3F7600B9489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htc.Vita.Mod.Desktop.JsonNet", "Htc.Vita.Mod.Desktop.JsonNet\Htc.Vita.Mod.Desktop.JsonNet.csproj", "{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.JsonNet", "Htc.Vita.Mod.Desktop.JsonNet\Htc.Vita.Mod.Desktop.JsonNet.csproj", "{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htc.Vita.Mod.Desktop.Log4Net", "Htc.Vita.Mod.Desktop.Log4Net\Htc.Vita.Mod.Desktop.Log4Net.csproj", "{227FD095-9D6C-471B-BDA8-DAE0238FB484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.Log4Net", "Htc.Vita.Mod.Desktop.Log4Net\Htc.Vita.Mod.Desktop.Log4Net.csproj", "{227FD095-9D6C-471B-BDA8-DAE0238FB484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +20,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Debug|x86.Build.0 = Debug|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Release|x86.ActiveCfg = Release|Any CPU
-		{7F3BF537-B9F1-4639-9CAF-1FD9F3A773C1}.Release|x86.Build.0 = Release|Any CPU
 		{7A85131A-4A9E-4F0B-8BFB-47B3F87DB8AE}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{7A85131A-4A9E-4F0B-8BFB-47B3F87DB8AE}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{7A85131A-4A9E-4F0B-8BFB-47B3F87DB8AE}.Debug|x86.ActiveCfg = Debug|Any CPU

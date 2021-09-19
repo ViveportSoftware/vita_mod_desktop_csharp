@@ -29,7 +29,6 @@ var ciVersion = $"{version}.0";
 var buildVersion = "Release".Equals(configuration) ? semanticVersion : $"{ciVersion}-CI{revision}";
 var targetProducts = new[]
 {
-        product,
         $"{product}.BouncyCastle",
         $"{product}.JsonNet",
         $"{product}.Log4Net"
