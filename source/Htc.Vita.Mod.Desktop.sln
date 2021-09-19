@@ -8,7 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.Tests.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.Tests.x86", "Htc.Vita.Mod.Desktop.Tests\Htc.Vita.Mod.Desktop.Tests.x86.csproj", "{0567BAF0-1BCA-40FC-8B90-12391CC4BEB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htc.Vita.Mod.Desktop.BouncyCastle", "Htc.Vita.Mod.Desktop.BouncyCastle\Htc.Vita.Mod.Desktop.BouncyCastle.csproj", "{29F8098E-E3A7-42BC-B9BF-C3F7600B9489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Htc.Vita.Mod.Desktop.BouncyCastle", "Htc.Vita.Mod.Desktop.BouncyCastle\Htc.Vita.Mod.Desktop.BouncyCastle.csproj", "{29F8098E-E3A7-42BC-B9BF-C3F7600B9489}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htc.Vita.Mod.Desktop.JsonNet", "Htc.Vita.Mod.Desktop.JsonNet\Htc.Vita.Mod.Desktop.JsonNet.csproj", "{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,14 @@ Global
 		{29F8098E-E3A7-42BC-B9BF-C3F7600B9489}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{29F8098E-E3A7-42BC-B9BF-C3F7600B9489}.Release|x86.ActiveCfg = Release|Any CPU
 		{29F8098E-E3A7-42BC-B9BF-C3F7600B9489}.Release|x86.Build.0 = Release|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{CDDDDC3E-B6EE-43FA-91D5-97AF0B05B7A7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

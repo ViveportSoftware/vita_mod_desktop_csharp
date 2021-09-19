@@ -30,7 +30,8 @@ var buildVersion = "Release".Equals(configuration) ? semanticVersion : $"{ciVers
 var targetProducts = new[]
 {
         product,
-        $"{product}.BouncyCastle"
+        $"{product}.BouncyCastle",
+        $"{product}.JsonNet"
 };
 
 // Define copyright
