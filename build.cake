@@ -23,7 +23,7 @@ var commitId = "SNAPSHOT";
 // Define product name and version
 var product = "Htc.Vita.Mod.Desktop";
 var companyName = "HTC";
-var version = "0.10.3";
+var version = "0.10.4";
 var semanticVersion = $"{version}.{revision}";
 var ciVersion = $"{version}.0";
 var buildVersion = "Release".Equals(configuration) ? semanticVersion : $"{ciVersion}-CI{revision}";
