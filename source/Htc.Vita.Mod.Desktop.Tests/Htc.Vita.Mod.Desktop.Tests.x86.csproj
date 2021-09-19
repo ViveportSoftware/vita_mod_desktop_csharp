@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Htc.Vita.Mod.Desktop.BouncyCastle\Htc.Vita.Mod.Desktop.BouncyCastle.csproj" />
     <ProjectReference Include="..\Htc.Vita.Mod.Desktop.JsonNet\Htc.Vita.Mod.Desktop.JsonNet.csproj" />
+    <ProjectReference Include="..\Htc.Vita.Mod.Desktop.Log4Net\Htc.Vita.Mod.Desktop.Log4Net.csproj" />
     <ProjectReference Include="..\Htc.Vita.Mod.Desktop\Htc.Vita.Mod.Desktop.csproj" />
   </ItemGroup>
   <ItemGroup>

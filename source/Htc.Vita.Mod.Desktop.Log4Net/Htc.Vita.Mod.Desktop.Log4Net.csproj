@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Htc.Vita.Mod.Desktop</RootNamespace>
+    <AssemblyName>Htc.Vita.Mod.Desktop.Log4Net</AssemblyName>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <DebugType>portable</DebugType>
+    <IntermediateOutputPath>..\..\temp\$(Configuration)\$(AssemblyName)\obj</IntermediateOutputPath>
+    <OutputPath>..\..\temp\$(Configuration)\$(AssemblyName)\bin</OutputPath>
+    <DocumentationFile>..\..\temp\$(Configuration)\$(AssemblyName)\bin\$(AssemblyName).xml</DocumentationFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>6</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Authors>HTC</Authors>
+    <PackageDescription>HTC Vita Desktop Mod module (log4net)</PackageDescription>
+    <PackageProjectUrl>https://github.com/ViveportSoftware/vita_mod_desktop_csharp/</PackageProjectUrl>
+    <PackageTags>htc;vita;mod;desktop;log4net</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Htc.Vita.Core" Version="0.10.6" />
+    <PackageReference Include="log4net" Version="2.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\generated\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
+  </ItemGroup>
+</Project>

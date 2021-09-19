@@ -31,7 +31,8 @@ var targetProducts = new[]
 {
         product,
         $"{product}.BouncyCastle",
-        $"{product}.JsonNet"
+        $"{product}.JsonNet",
+        $"{product}.Log4Net"
 };
 
 // Define copyright
